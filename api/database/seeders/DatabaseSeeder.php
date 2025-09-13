@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Achievement;
 use App\Models\Category;
+use App\Models\MovieList;
 use App\Models\Rank;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -15,16 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        Rank::factory(5)->create();
 
-        Rank::factory(4);
+        MovieList::factory(30)->create();
 
-        Category::factory(15);
+        Achievement::factory(20)->create();
 
-        User::factory(10)->create();
+        Category::factory(15)->create();
+
+        $users = User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+
+
     }
 }

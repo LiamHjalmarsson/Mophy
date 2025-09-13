@@ -17,7 +17,10 @@ class AchievementFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->unique()->sentence(2),
+            'description' => fake()->sentence(),
+            'icon' => fake()->imageUrl(50, 50, 'abstract'),
+            'points' => fake()->numberBetween(10, 100)
         ];
     }
 }

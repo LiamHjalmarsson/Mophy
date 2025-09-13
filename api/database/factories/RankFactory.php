@@ -17,7 +17,10 @@ class RankFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->randomElement(["Beginner", "Pro", "Legend", "Master"]),
+            'level' => fake()->numberBetween(1, 100),
+            'icon' => fake()->imageUrl(50, 50, 'abstract'),
+            'description' => fake()->sentence()
         ];
     }
 }

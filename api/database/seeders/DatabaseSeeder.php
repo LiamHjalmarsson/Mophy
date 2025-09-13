@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
+use App\Models\Rank;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,6 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+
+        Rank::factory(4);
+
+        Category::factory(15);
+
         User::factory(10)->create();
 
         User::factory()->create([

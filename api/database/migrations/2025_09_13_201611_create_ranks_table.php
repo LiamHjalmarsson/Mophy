@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('level')->default(1);
+            $table->string('icon')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

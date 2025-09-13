@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('tmdb_id')->index();
             $table->timestamps();
+
+            $table->unique(['user_id', 'tmdb_id']);
         });
     }
 

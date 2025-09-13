@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('watch_laters', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('tmdb_id')->index();
+            $table->timestamp('added_at')->nullable();
             $table->timestamps();
+
+            $table->unique(['user_id', 'tmdb_id']);
         });
     }
 

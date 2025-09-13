@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('watcheds', function (Blueprint $table) {
-            $table->id();
+            $table->id();   
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('tmdb_id')->index();
+            $table->timestamp('watched_at')->nullable();
             $table->timestamps();
+
+            $table->unique(['user_id', 'tmdb_id']);
         });
     }
 

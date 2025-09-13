@@ -16,10 +16,22 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
+    public function create() {
+
+    }
+
     public function show (User $user) 
     {
-        $user->load(['followrs', 'following']);
+        $user->load(['followers', 'following']);
 
         return new UserResource($user);
+    }
+
+    public function update() {
+
+    }
+
+    public function delete() {
+
     }
 }

@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function show (User $user) 
     {
-        $user->load(['followers', 'following']);
+        $user->load(['rank', 'followers', 'following', 'achievements']);
 
         return new UserResource($user);
     }

@@ -21,9 +21,11 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = $this->route('user')->id ?? null;
+
         return [
             'name' => ['sometimes', 'string', 'max:255'],
-            'username' => ['sometimes', 'string', 'max:255', 'unique:users,username'],
+            'username' => ['sometimes', 'string', 'max:255', 'unique:users,username,' . $userId],
             'country'  => ['nullable', 'string', 'max:255'],
             'bio' => ['nullable', 'string'],
             'avatar' => ['nullable', 'string']

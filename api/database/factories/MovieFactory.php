@@ -18,9 +18,6 @@ class MovieFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
-            'duration' => fake()->time('H:i:s'),
-            'description' => fake()->paragraph(),
-            'release_year' => fake()->year(),
         ];
     }
 }

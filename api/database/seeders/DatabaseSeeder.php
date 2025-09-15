@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RankSeeder::class,
             AchievementSeeder::class,
+            MovieListSeeder::class,
             CategorySeeder::class,
             UserSeeder::class,
-            MovieListSeeder::class,
             FollowSeeder::class,
         ]);
     }

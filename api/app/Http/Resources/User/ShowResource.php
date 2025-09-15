@@ -18,6 +18,7 @@ class ShowResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'username' => $this->username,
+            'country' => $this->country,
             'avatar' => $this->avatar,
             'bio' => $this->bio
         ];

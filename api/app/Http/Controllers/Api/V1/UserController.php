@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Actions\User\StoreAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\StoreRequest;
 use App\Http\Resources\User\IndexResource;
 use App\Http\Resources\User\ShowResource;
 use App\Models\User;
@@ -23,9 +25,11 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request, StoreAction $action)
     {
-        //
+        $movie = $action($request);
+
+        return new ShowResource($movie);
     }
 
     /**

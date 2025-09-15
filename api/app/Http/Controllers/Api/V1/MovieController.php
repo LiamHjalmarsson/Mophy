@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Movie\MovieIndexResource;
+use App\Http\Resources\Movie\MovieShowResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -30,9 +31,9 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Movie $movie)
     {
-        //
+        return new MovieShowResource($movie);
     }
 
     /**

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\MovieController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,6 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('movies', MovieController::class);
+
+    Route::apiResource('users', UserController::class);
 });

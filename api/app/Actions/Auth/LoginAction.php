@@ -19,7 +19,7 @@ class LoginAction
             ]);
         }
 
-        $token = $user->createToken('laravel_api')->plainTextToken;
+        $token = $user->createToken('laravel_api_token')->plainTextToken;
 
         return [
             'token' => $token,

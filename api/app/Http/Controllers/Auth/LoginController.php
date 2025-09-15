@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\Auth;
+namespace App\Http\Controllers\Auth;
 
 use App\Actions\Auth\LoginAction;
 use App\Http\Controllers\Controller;
@@ -13,7 +13,7 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request, LoginAction $action)
     {
-        $data = $action($request, false);
+        $data = $action($request, true);
 
         return response()->json($data, 200);
     }

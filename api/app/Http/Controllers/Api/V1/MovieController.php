@@ -10,6 +10,7 @@ use App\Http\Requests\Movie\UpdateRequest;
 use App\Http\Resources\Movie\IndexResource;
 use App\Http\Resources\Movie\ShowResource;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Gate;
 
 class MovieController extends Controller
 {
@@ -46,6 +47,8 @@ class MovieController extends Controller
      */
     public function update(UpdateRequest $request, Movie $movie, UpdateAction $action)
     {
+        Gate::authorize('update', $movie);
+
         $updatedMovie  = $action($request, $movie);
 
         return new ShowResource($updatedMovie);
@@ -56,6 +59,8 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
+        Gate::authorize('delete', $movie);
+
         $movie->delete();
 
         return response()->noContent();

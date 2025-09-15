@@ -10,7 +10,6 @@ use App\Http\Requests\Movie\UpdateRequest;
 use App\Http\Resources\Movie\IndexResource;
 use App\Http\Resources\Movie\ShowResource;
 use App\Models\Movie;
-use Illuminate\Http\JsonResponse;
 
 class MovieController extends Controller
 {
@@ -57,6 +56,8 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        //
+        $movie->delete();
+
+        return response()->noContent();
     }
 }

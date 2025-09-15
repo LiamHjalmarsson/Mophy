@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateRequest;
+use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,19 +18,20 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
-    public function store() {
-
+    public function store()
+    {
+        return response()->json("ss", 200);
     }
+
 
     public function show (User $user) 
     {
         $user->load(['rank', 'followers', 'following', 'achievements']);
 
-        return new UserResource($user);
-    }
+        if (!$user) {
+        }
 
-    public function update(UpdateRequest $request, User $user) 
-    {
+        return new UserResource($user);
     }
 
     public function destroy(User $user) 

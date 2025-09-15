@@ -26,6 +26,7 @@ class User extends Authenticatable
         'username',
         'country',
         'bio',
+        'avatar',
         'rank_id',
         'password',
     ];

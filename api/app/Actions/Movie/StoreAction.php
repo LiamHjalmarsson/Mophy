@@ -11,6 +11,10 @@ class StoreAction
     {
         $validated = $request->validated();
 
+        if ($request->hasFile('cover')) {
+            $validated['cover'] = $request->file('cover')->store('covers', 'public');
+        }
+
         return Movie::create($validated);
     }
 }

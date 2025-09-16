@@ -21,7 +21,7 @@ class IndexResource extends JsonResource
             'description' => $this->description,
             'release_date'=> $this->release_date,
             'duration' => $this->duration,
-            'cover' => $this->cover,
+            'cover' => $this->cover ? asset('storage/' . $this->cover) : null,
             'created_by' => $this->created_by,
         ];
     }

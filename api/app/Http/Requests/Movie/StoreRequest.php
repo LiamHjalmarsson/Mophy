@@ -22,7 +22,13 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'tmdb_id' => 'nullable|integer',
             'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'release_date' => 'nullable|date',
+            'duration' => 'nullable|integer|min:1',
+            'cover' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'created_by' => 'nullable|exists:users,id',
         ];
     }
 }

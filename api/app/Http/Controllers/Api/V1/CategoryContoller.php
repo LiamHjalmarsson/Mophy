@@ -10,6 +10,8 @@ use App\Http\Requests\Category\UpdateRequest;
 use App\Http\Resources\Category\IndexResource;
 use App\Http\Resources\Category\ShowResource;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryContoller extends Controller
 {
@@ -28,6 +30,8 @@ class CategoryContoller extends Controller
      */
     public function store(StoreRequest $request, StoreAction $action)
     {
+        Gate::authorize('create', User::class);
+
         $category = $action($request);
 
         return new ShowResource($category);
@@ -46,6 +50,8 @@ class CategoryContoller extends Controller
      */
     public function update(UpdateRequest $request, Category $category, UpdateAction $action)
     {
+        Gate::authorize('update', User::class);
+
         $updatedCategory = $action($request, $category);
 
         return new ShowResource($updatedCategory); 
@@ -56,6 +62,8 @@ class CategoryContoller extends Controller
      */
     public function destroy(Category $category)
     {
+        Gate::authorize('destroy', User::class);
+
         $category->delete();
 
         return response()->noContent();

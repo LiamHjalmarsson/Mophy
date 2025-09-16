@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Actions\Category\StoreAction;
+use App\Actions\Category\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Category\UpdateRequest;
 use App\Http\Resources\Category\IndexResource;
 use App\Http\Resources\Category\ShowResource;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryContoller extends Controller
 {
@@ -24,9 +26,11 @@ class CategoryContoller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRequest $request)
+    public function store(StoreRequest $request, StoreAction $action)
     {
-        //
+        $category = $action($request);
+
+        return new ShowResource($category);
     }
 
     /**
@@ -40,7 +44,7 @@ class CategoryContoller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(UpdateRequest $request, Category $category, UpdateAction $action)
     {
         //
     }

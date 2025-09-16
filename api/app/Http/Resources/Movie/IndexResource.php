@@ -16,7 +16,13 @@ class IndexResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'tmdb_id' => $this->tmdb_id,
             'title' => $this->title,
+            'description' => $this->description,
+            'release_date'=> $this->release_date,
+            'duration' => $this->duration,
+            'cover' => $this->cover,
+            'created_by' => $this->created_by,
         ];
     }
 }

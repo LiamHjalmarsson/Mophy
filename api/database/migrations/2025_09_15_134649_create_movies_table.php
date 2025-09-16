@@ -14,6 +14,12 @@ return new class extends Migration
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->unsignedBigInteger('tmdb_id')->nullable()->index();
+            $table->text('description')->nullable();
+            $table->integer('duration')->nullable();
+            $table->date('release_date')->nullable();
+            $table->string('cover')->nullable();    
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }

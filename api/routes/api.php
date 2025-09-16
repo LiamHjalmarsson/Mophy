@@ -23,8 +23,7 @@ Route::prefix('auth')->group(function () {
 Route::prefix('v1')->group(function () {
     Route::apiResource('movies', MovieController::class);
     
-    Route::post('users/{user}/avatar', [UserController::class, 'updateAvatar']);
-
     Route::apiResource('users', UserController::class);
 
+    Route::post('users/{user}/avatar', [UserController::class, 'updateAvatar']);
 });

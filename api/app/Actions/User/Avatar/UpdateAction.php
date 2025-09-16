@@ -10,7 +10,7 @@ class UpdateAction
 {
     public function __invoke(UpdateRequest $request, User $user): User
     {
-        $validated = $request->validated();
+       $request->validated();
 
         if ($user->avatar && $user->avatar !== 'avatars/default.png') {
             Storage::disk('public')->delete($user->avatar);

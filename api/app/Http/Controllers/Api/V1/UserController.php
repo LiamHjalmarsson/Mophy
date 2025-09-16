@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Actions\User\Avatar\UpdateAction as AvatarUpdateAction;
 use App\Actions\User\StoreAction;
 use App\Actions\User\UpdateAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Avatar\UpdateRequest as AvatarUpdateRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\IndexResource;
 use App\Http\Resources\User\ShowResource;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -47,7 +48,7 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, User $user, UpdateAction $action)
     {
-        $updatedUser  = $action($request, $user);
+        $updatedUser = $action($request, $user);
 
         return new ShowResource($updatedUser);
     }
@@ -55,12 +56,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return response()->noContent();
     }
 
-    public function updateAvatar() {
+    public function updateAvatar(AvatarUpdateRequest $request, User $user, AvatarUpdateAction $action) 
+    {
+        $updatedUser = $action($request, $user);
 
+        return new ShowResource($updatedUser);
     }
 }

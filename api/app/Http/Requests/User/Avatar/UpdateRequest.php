@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\User\Avatar;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,12 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|email|unique:users,email,' . $this->user->id,
-            'password' => 'sometimes|min:8|confirmed',
-            'username' => 'sometimes|string|unique:users,username,' . $this->user->id,
-            'country' => 'sometimes|string',
-            'bio' => 'sometimes|string',
+            'avatar' => 'required|image|mimes:png,jpg,gif|max:2048',
         ];
     }
 }

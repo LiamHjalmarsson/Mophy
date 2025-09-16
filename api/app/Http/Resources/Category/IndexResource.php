@@ -26,7 +26,7 @@ class IndexResource extends JsonResource
         if ($this->cover) {
             return  asset('storage/' . $this->cover);
         } else {
-            return asset('storage/defaults/movie-cover.png');
+            return asset('storage/defaults/category-cover.png');
         }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Category\StoreRequest;
 use App\Http\Resources\Category\IndexResource;
+use App\Http\Resources\Category\ShowResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -21,14 +22,6 @@ class CategoryContoller extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(StoreRequest $request)
@@ -41,15 +34,7 @@ class CategoryContoller extends Controller
      */
     public function show(Category $category)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        //
+        return new ShowResource($category);
     }
 
     /**

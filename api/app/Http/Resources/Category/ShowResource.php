@@ -14,6 +14,19 @@ class ShowResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'description' => $this->description,
+            'cover' => $this->coverImage(),
+        ];
+    }
+
+    private function coverImage () {
+        if ($this->cover) {
+            return  asset('storage/' . $this->cover);
+        } else {
+            return asset('storage/defaults/category-cover.png');
+        }
     }
 }

@@ -21,8 +21,16 @@ class IndexResource extends JsonResource
             'description' => $this->description,
             'release_date'=> $this->release_date,
             'duration' => $this->duration,
-            'cover' => $this->cover ? asset('storage/' . $this->cover) : null,
+            'cover' => $this->coverImage(),
             'created_by' => $this->created_by,
         ];
+    }
+
+    private function coverImage () {
+        if ($this->cover) {
+            return  asset('storage/' . $this->cover);
+        } else {
+            return asset('storage/defaults/movie-cover.png');
+        }
     }
 }

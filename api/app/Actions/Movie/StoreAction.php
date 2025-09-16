@@ -13,6 +13,8 @@ class StoreAction
 
         if ($request->hasFile('cover')) {
             $validated['cover'] = $request->file('cover')->store('covers', 'public');
+        } else {
+            $validated['cover'] = 'defaults/movie-cover.png';
         }
 
         return Movie::create($validated);

@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        $this->call(
+        $this->call([
             MovieSeed::class,
             CategorySeed::class
-        );
+        ]);
 
         User::factory(10)->create();
 

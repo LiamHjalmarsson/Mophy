@@ -20,7 +20,7 @@ class CategoryContoller extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::with('movies')->paginate(25);
 
         return IndexResource::collection($categories);
     }
@@ -42,6 +42,8 @@ class CategoryContoller extends Controller
      */
     public function show(Category $category)
     {
+        $category->load('movies');
+        
         return new ShowResource($category);
     }
 

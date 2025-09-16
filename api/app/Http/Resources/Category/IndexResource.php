@@ -18,15 +18,20 @@ class IndexResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'cover' => $this->coverImage(),
+            'cover' => $this->cover_url,
+            'movies' => $this->categoryMovies()
         ];
     }
 
-    private function coverImage () {
-        if ($this->cover) {
-            return  asset('storage/' . $this->cover);
-        } else {
-            return asset('storage/defaults/category-cover.png');
-        }
+    private function categoryMovies(): mixed
+    {
+        return $this->whenLoaded('movies', function () {
+            return $this->movies->map(function ($movie) {
+                return [
+                    'id' => $movie->id,
+                    'title' => $movie->title,
+                ];
+            });
+        });
     }
 }

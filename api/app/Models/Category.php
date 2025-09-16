@@ -20,4 +20,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Movie::class, 'category_movie');
     }
+
+    public function getCoverUrlAttribute(): string
+    {
+        return $this->cover ? asset('storage/category' . $this->cover) : asset('storage/defaults/category-cover.png');
+    }
 }

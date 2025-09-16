@@ -18,4 +18,9 @@ class Movie extends Model
         'cover',
         'created_by',
     ];
+
+    public function getCoverUrlAttribute(): string
+    {
+        return $this->cover ? asset('storage/movie' . $this->cover) : asset('storage/defaults/movie-cover.png');
+    }
 }

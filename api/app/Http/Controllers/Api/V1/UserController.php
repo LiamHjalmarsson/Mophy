@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Actions\User\StoreAction;
+use App\Actions\User\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\IndexResource;
 use App\Http\Resources\User\ShowResource;
 use App\Models\User;
@@ -43,9 +45,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, User $user, UpdateAction $action)
     {
-        //
+        $updatedUser  = $action($request, $user);
+
+        return new ShowResource($updatedUser);
     }
 
     /**

@@ -18,8 +18,7 @@ class StoreAction
             $validated['avatar'] = 'avatars/default.png';
         }
 
-         $validated['password'] = Hash::make($validated['password']);
-
+        $validated['password'] = Hash::make($validated['password']);
 
         return User::create($validated);
     }

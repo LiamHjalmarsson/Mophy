@@ -46,7 +46,9 @@ class CategoryContoller extends Controller
      */
     public function update(UpdateRequest $request, Category $category, UpdateAction $action)
     {
-        //
+        $updatedCategory = $action($request, $category);
+
+        return new ShowResource($updatedCategory); 
     }
 
     /**

@@ -20,7 +20,6 @@ class UpdateAction
             $validated['cover'] = $request->file('cover')->store('covers', 'public');
         }
 
-
         $category->update($validated);
 
         return $category;

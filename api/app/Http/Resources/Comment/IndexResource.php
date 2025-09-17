@@ -21,7 +21,7 @@ class IndexResource extends JsonResource
                 'username' => $this->user->username
             ],
             'movie_id' => $this->movie_id,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at_formatted
         ];
     }
 }

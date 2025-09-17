@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\CategoryContoller;
+use App\Http\Controllers\Api\V1\CommentController;
 use App\Http\Controllers\Api\V1\MovieController;
 use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
@@ -22,8 +23,9 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('v1')->group(function () {
-
     Route::apiResource('categories', CategoryContoller::class);
+
+    Route::apiResource('comments', CommentController::class);
 
     Route::apiResource('movies', MovieController::class);
     

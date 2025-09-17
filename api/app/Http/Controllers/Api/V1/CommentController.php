@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Actions\Comment\StoreAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Comment\StoreRequest;
 use App\Http\Resources\Comment\IndexResource;
 use App\Http\Resources\Comment\ShowResource;
 use App\Models\Comment;
@@ -23,9 +25,11 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request, StoreAction $action)
     {
-        //
+        $comment = $action($request);
+
+        return new ShowResource($comment);
     }
 
     /**

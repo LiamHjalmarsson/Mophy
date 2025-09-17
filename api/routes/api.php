@@ -27,13 +27,12 @@ Route::prefix('v1')->group(function () {
 
     Route::apiResource('comments', CommentController::class);
 
-    
     Route::prefix('movies')->group(function () {
         Route::apiResource('/', MovieController::class)->parameters(['' => 'movie']);
 
-        Route::post('{movie}/like', [MovieController::class, 'like']);
+        Route::post('{movie}/reactToMovie', [MovieController::class, 'reactToMovie']);
 
-        Route::delete('{movie}/like', [MovieController::class, 'unlike']);
+        Route::delete('{movie}/unlike', [MovieController::class, 'removeReaction']);
     });
     
     Route::prefix('users')->group(function () {

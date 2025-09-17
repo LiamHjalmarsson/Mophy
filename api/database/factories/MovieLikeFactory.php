@@ -20,7 +20,8 @@ class MovieLikeFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'movie_id' => Movie::factory()
+            'movie_id' => Movie::factory(),
+            'type' => fake()->randomElement(['like', 'dislike'])
         ];
     }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('movie_id')->constrained()->cascadeOnDelete();
+            $table->enum('type', ['like', 'dislike']);
             $table->unique(['user_id', 'movie_id']);
             $table->timestamps();
         });

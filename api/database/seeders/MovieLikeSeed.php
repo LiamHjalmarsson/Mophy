@@ -26,7 +26,10 @@ class MovieLikeSeed extends Seeder
             $likedMovies = $movies->random(rand(1, 4)); 
 
             foreach($likedMovies as $movie) {
-                $movie->likes()->firstOrCreate(['user_id' => $user->id]);
+                $movie->likes()->firstOrCreate(
+                    ['user_id' => $user->id],
+                    ['type' => fake()->randomElement(['like', 'dislike'])]
+                );
             }
         }
     }

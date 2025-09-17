@@ -69,10 +69,15 @@ class MovieController extends Controller
         return response()->noContent();
     }
 
-    public function like(MovieLikeStoreRequest $request, Movie $movie, MovieLikeStoreAction $action) 
+    public function reactToMovie(MovieLikeStoreRequest $request, Movie $movie, MovieLikeStoreAction $action) 
     {
         $like = $action($request, $movie);
 
         return new MovieLikeShowResource($like->load('user'));
+    }
+
+    public function removeReaction()
+    {
+        
     }
 }

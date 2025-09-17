@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Actions\Movie\MovieLike\DeleteAction;
 use App\Actions\Movie\MovieLike\StoreAction as MovieLikeStoreAction;
 use App\Actions\Movie\StoreAction;
 use App\Actions\Movie\UpdateAction;
@@ -13,6 +14,7 @@ use App\Http\Resources\Movie\IndexResource;
 use App\Http\Resources\Movie\MovieLike\ShowResource as MovieLikeShowResource;
 use App\Http\Resources\Movie\ShowResource;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class MovieController extends Controller
@@ -76,8 +78,14 @@ class MovieController extends Controller
         return new MovieLikeShowResource($like->load('user'));
     }
 
-    public function removeReaction()
+    public function removeReaction(Movie $movie, DeleteAction $action)
     {
-        
+        $deleted = $action(Auth::id(), $movie);
+
+        if (!$deleted) {
+            return response()->json(['message' => 'Reaction not found'], 404);
+        }
+
+        return response()->noContent();
     }
 }

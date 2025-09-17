@@ -32,7 +32,7 @@ Route::prefix('v1')->group(function () {
 
         Route::post('{movie}/reactToMovie', [MovieController::class, 'reactToMovie']);
 
-        Route::delete('{movie}/unlike', [MovieController::class, 'removeReaction']);
+        Route::delete('{movie}/removeReaction', [MovieController::class, 'removeReaction']);
     });
     
     Route::prefix('users')->group(function () {

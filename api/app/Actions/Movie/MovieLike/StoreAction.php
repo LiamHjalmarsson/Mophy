@@ -12,7 +12,7 @@ class StoreAction
     {
         $validated = $request->validated();
 
-        return MovieLike::firstOrCreate(
+        return MovieLike::updateOrCreate(
             [
                 'user_id' => $validated["user_id"],
                 'movie_id' => $movie->id

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Actions\Comment\StoreAction;
+use App\Actions\Comment\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Comment\StoreRequest;
+use App\Http\Requests\Comment\UpdateRequest;
 use App\Http\Resources\Comment\IndexResource;
 use App\Http\Resources\Comment\ShowResource;
 use App\Models\Comment;
@@ -45,9 +47,11 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Comment $comment)
+    public function update(UpdateRequest $request, Comment $comment, UpdateAction $action)
     {
-        //
+        $updatedComment = $action($request, $comment);
+
+        return new ShowResource($updatedComment);
     }
 
     /**

@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MovieSeed::class,
             CategorySeed::class,
-            CommentSeed::class
+            CommentSeed::class,
+            MovieLikeSeed::class
         ]);
 
         User::factory(10)->create();

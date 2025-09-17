@@ -27,9 +27,18 @@ Route::prefix('v1')->group(function () {
 
     Route::apiResource('comments', CommentController::class);
 
-    Route::apiResource('movies', MovieController::class);
     
-    Route::apiResource('users', UserController::class);
+    Route::prefix('movies')->group(function () {
+        Route::apiResource('/', MovieController::class)->parameters(['' => 'movie']);
 
-    Route::post('users/{user}/avatar', [UserController::class, 'updateAvatar']);
+        Route::post('{movie}/like', [MovieController::class, 'like']);
+
+        Route::delete('{movie}/like', [MovieController::class, 'unlike']);
+    });
+    
+    Route::prefix('users')->group(function () {
+        Route::apiResource('/', UserController::class)->parameters(['' => 'user']);
+
+        Route::post('{user}/avatar', [UserController::class, 'updateAvatar']);
+    });
 });

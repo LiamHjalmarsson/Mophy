@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Actions\Movie\MovieLike\StoreAction as MovieLikeStoreAction;
 use App\Actions\Movie\StoreAction;
 use App\Actions\Movie\UpdateAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Movie\MovieLike\StoreRequest as MovieLikeStoreRequest;
 use App\Http\Requests\Movie\StoreRequest;
 use App\Http\Requests\Movie\UpdateRequest;
 use App\Http\Resources\Movie\IndexResource;
+use App\Http\Resources\Movie\MovieLike\ShowResource as MovieLikeShowResource;
 use App\Http\Resources\Movie\ShowResource;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Gate;
@@ -64,5 +67,12 @@ class MovieController extends Controller
         $movie->delete();
 
         return response()->noContent();
+    }
+
+    public function like(MovieLikeStoreRequest $request, Movie $movie, MovieLikeStoreAction $action) 
+    {
+        $like = $action($request, $movie);
+
+        return new MovieLikeShowResource($like->load('user'));
     }
 }

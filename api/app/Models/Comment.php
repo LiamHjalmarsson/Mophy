@@ -29,6 +29,6 @@ class Comment extends Model
 
     public function getCreatedAtFormattedAttribute(): ?string
     {
-        return $this->created_at ? Carbon::parse($this->created_at)->format('Y-m-d 00:00') : null;
+        return $this->created_at ? Carbon::parse($this->created_at)->format('Y-m-d') : null;
     }
 }

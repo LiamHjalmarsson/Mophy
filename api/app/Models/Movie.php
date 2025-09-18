@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Movie extends Model
@@ -28,6 +29,11 @@ class Movie extends Model
     public function watched(): HasMany 
     {
         return $this->hasMany(Watched::class);
+    }
+
+    public function movieLlistsists(): BelongsToMany
+    {
+        return $this->belongsToMany(MovieList::class, 'list_movies')->withTimestamps();
     }
 
     public function getCoverUrlAttribute(): string

@@ -25,12 +25,18 @@ Route::prefix('auth')->group(function () {
 Route::prefix('v1')->group(function () {
     Route::apiResource('categories', CategoryContoller::class);
 
-    Route::apiResource('comments', CommentController::class);
+    Route::prefix('comments')->group(function () {
+        Route::apiResource('/', CommentController::class)->parameters(['' => 'comment']);
+
+        Route::post('{comment}/react', [CommentController::class, 'react']);
+
+        Route::delete('{comment}/removeReaction', [CommentController::class, 'removeReaction']);
+    });
 
     Route::prefix('movies')->group(function () {
         Route::apiResource('/', MovieController::class)->parameters(['' => 'movie']);
 
-        Route::post('{movie}/reactToMovie', [MovieController::class, 'reactToMovie']);
+        Route::post('{movie}/react', [MovieController::class, 'react']);
 
         Route::delete('{movie}/removeReaction', [MovieController::class, 'removeReaction']);
     });

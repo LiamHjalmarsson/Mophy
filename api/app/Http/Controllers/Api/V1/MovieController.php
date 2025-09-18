@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Actions\Movie\MovieLike\DeleteAction;
+use App\Actions\Movie\MovieLike\DestroyAction;
 use App\Actions\Movie\MovieLike\StoreAction as MovieLikeStoreAction;
 use App\Actions\Movie\StoreAction;
 use App\Actions\Movie\UpdateAction;
@@ -71,14 +71,16 @@ class MovieController extends Controller
         return response()->noContent();
     }
 
-    public function reactToMovie(MovieLikeStoreRequest $request, Movie $movie, MovieLikeStoreAction $action) 
+    public function react(MovieLikeStoreRequest $request, Movie $movie, MovieLikeStoreAction $action) 
     {
         $like = $action($request, $movie);
 
-        return new MovieLikeShowResource($like->load('user'));
+        $like->load('user');
+
+        return new MovieLikeShowResource($like);
     }
 
-    public function removeReaction(Movie $movie, DeleteAction $action)
+    public function removeReaction(Movie $movie, DestroyAction $action)
     {
         $deleted = $action(Auth::id(), $movie);
 

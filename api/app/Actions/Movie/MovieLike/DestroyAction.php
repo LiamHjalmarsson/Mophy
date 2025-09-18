@@ -5,7 +5,7 @@ namespace App\Actions\Movie\MovieLike;
 use App\Models\Movie;
 use App\Models\MovieLike;
 
-class DeleteAction 
+class DestroyAction 
 {
     public function __invoke(?int $userId, Movie $movie): bool
     {

@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\V1\Movie\MovieController;
 use App\Http\Controllers\Api\V1\Movie\WatchedController;
 use App\Http\Controllers\Api\V1\Movie\WatchLaterController;
 use App\Http\Controllers\Api\V1\User\AvatarController;
+use App\Http\Controllers\Api\V1\User\FollowController;
 use App\Http\Controllers\Api\V1\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -63,5 +64,7 @@ Route::prefix('v1')->group(function () {
         Route::get('{user}/watched', [WatchedController::class, 'index']);
 
         Route::get('{user}/watchLater', [WatchLaterController::class, 'index']);
+
+        Route::post('{user}/follow', [FollowController::class, 'store']);
     });
 });

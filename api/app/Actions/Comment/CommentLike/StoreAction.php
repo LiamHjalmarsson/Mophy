@@ -14,7 +14,7 @@ class StoreAction
 
         return CommentLike::updateOrCreate(
             [
-                'user_id'    => $validated['user_id'],
+                'user_id' => $validated['user_id'],
                 'comment_id' => $comment->id,
             ],
             [

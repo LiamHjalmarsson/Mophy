@@ -15,7 +15,6 @@ class DestroyAction
 
         $query = WatchLater::where('user_id', $userId);
 
-
         $query->where('movie_id', $movie->id);
 
         $watchLater = $query->first();

@@ -70,6 +70,18 @@ class User extends Authenticatable
         return $this->hasMany(Watched::class);
     }
 
+    public function followers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');
+    }
+
+    public function following(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
+    }
+
+    // Querys 
+
     public function watchedMovies(): BelongsToMany
     {
         $query = $this->belongsToMany(Movie::class, 'watcheds');

@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\Comment\LikeController;
 use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
 use App\Http\Controllers\Api\V1\Movie\MovieController;
 use App\Http\Controllers\Api\V1\Movie\WatchedController;
+use App\Http\Controllers\Api\V1\Movie\WatchLaterController;
 use App\Http\Controllers\Api\V1\User\AvatarController;
 use App\Http\Controllers\Api\V1\User\UserController;
 use Illuminate\Http\Request;
@@ -48,6 +49,10 @@ Route::prefix('v1')->group(function () {
         Route::post('{movie}/watched', [WatchedController::class, 'watched']);
 
         Route::delete('{movie}/unWatch', [WatchedController::class, 'unWatch']);
+
+        Route::post('{movie}/watchLater', [WatchLaterController::class, 'store']);
+
+        Route::delete('{movie}/watchLater', [WatchLaterController::class, 'destroy']);
     });
     
     Route::prefix('users')->group(function () {

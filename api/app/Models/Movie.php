@@ -31,9 +31,9 @@ class Movie extends Model
         return $this->hasMany(Watched::class);
     }
 
-    public function movieLlistsists(): BelongsToMany
+    public function lists(): BelongsToMany
     {
-        return $this->belongsToMany(MovieList::class, 'list_movies')->withTimestamps();
+        return $this->belongsToMany(MovieList::class, 'list_movies', 'movie_id', 'movie_list_id')->withTimestamps();
     }
 
     public function getCoverUrlAttribute(): string

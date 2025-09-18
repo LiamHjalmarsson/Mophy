@@ -61,5 +61,7 @@ Route::prefix('v1')->group(function () {
         Route::post('{user}/avatar', [AvatarController::class, 'update']);
 
         Route::get('{user}/watched', [WatchedController::class, 'index']);
+
+        Route::get('{user}/watchLater', [WatchLaterController::class, 'index']);
     });
 });

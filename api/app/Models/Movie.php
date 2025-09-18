@@ -25,7 +25,7 @@ class Movie extends Model
         return $this->hasMany(MovieLike::class);
     }
 
-    public function watche(): HasMany 
+    public function watched(): HasMany 
     {
         return $this->hasMany(Watched::class);
     }

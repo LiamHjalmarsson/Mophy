@@ -14,4 +14,8 @@ class Watched extends Model
         'movie_id',
         'watched_at'
     ];
+
+    protected $casts = [
+        'watched_at' => 'datetime',
+    ];
 }

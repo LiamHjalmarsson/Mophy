@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -67,5 +68,16 @@ class User extends Authenticatable
     public function watcheds(): HasMany
     {
         return $this->hasMany(Watched::class);
+    }
+
+    public function watchedMovies(): BelongsToMany
+    {
+        $query = $this->belongsToMany(Movie::class, 'watcheds');
+        
+        $query->withPivot('watched_at');
+
+        $watched = $query->withTimestamps();
+
+        return $watched;
     }
 }

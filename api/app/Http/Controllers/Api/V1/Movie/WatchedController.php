@@ -6,12 +6,21 @@ use App\Actions\Movie\Watched\DestroyAction;
 use App\Actions\Movie\Watched\StoreAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Movie\Watched\StoreRequest;
+use App\Http\Resources\Movie\Watched\IndexResource;
 use App\Http\Resources\Movie\Watched\ShowResource;
 use App\Models\Movie;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class WatchedController extends Controller
 {
+
+    public function index(User $user) {
+        $movies = $user->watchedMovies()->paginate(25);
+
+        return IndexResource::collection($movies);
+    }
+
     public function watched(StoreRequest $request, Movie $movie, StoreAction $action)
     {
         $watched = $action($request, $movie);

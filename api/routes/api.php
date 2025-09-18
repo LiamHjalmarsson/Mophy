@@ -48,12 +48,13 @@ Route::prefix('v1')->group(function () {
         Route::post('{movie}/watched', [WatchedController::class, 'watched']);
 
         Route::delete('{movie}/unWatch', [WatchedController::class, 'unWatch']);
-
     });
     
     Route::prefix('users')->group(function () {
         Route::apiResource('/', UserController::class)->parameters(['' => 'user']);
 
         Route::post('{user}/avatar', [AvatarController::class, 'update']);
+
+        Route::get('{user}/watched', [WatchedController::class, 'index']);
     });
 });

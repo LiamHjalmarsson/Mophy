@@ -39,6 +39,11 @@ Route::prefix('v1')->group(function () {
         Route::post('{movie}/react', [MovieController::class, 'react']);
 
         Route::delete('{movie}/removeReaction', [MovieController::class, 'removeReaction']);
+
+        Route::post('{movie}/watched', [MovieController::class, 'watched']);
+
+        Route::delete('{movie}/unWatch', [MovieController::class, 'unWatch']);
+
     });
     
     Route::prefix('users')->group(function () {

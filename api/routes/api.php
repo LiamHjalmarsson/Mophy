@@ -5,7 +5,6 @@ use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Category\CategoryContoller;
 use App\Http\Controllers\Api\V1\Comment\CommentController;
-use App\Http\Controllers\Api\V1\Comment\CommentLike;
 use App\Http\Controllers\Api\V1\Comment\LikeController;
 use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
 use App\Http\Controllers\Api\V1\Movie\MovieController;
@@ -68,5 +67,9 @@ Route::prefix('v1')->group(function () {
         Route::post('{user}/follow', [FollowController::class, 'store']);
 
         Route::delete('{user}/unfollow', [FollowController::class, 'destroy']);
+
+        Route::get('{user}/followers', [FollowController::class, 'followers']);
+        
+        Route::get('{user}/following', [FollowController::class, 'following']);
     });
 });

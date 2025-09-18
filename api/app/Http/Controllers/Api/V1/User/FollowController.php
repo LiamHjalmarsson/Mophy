@@ -62,4 +62,16 @@ class FollowController extends Controller
 
         return response()->noContent();
     }
+
+    public function followers(User $user) {
+        $followers = $user->followers()->paginate(25);
+
+        return ShowResource::collection($followers);
+    }
+
+    public function following(User $user) {
+        $following = $user->following()->paginate(25);
+
+        return ShowResource::collection($following);
+    } 
 }

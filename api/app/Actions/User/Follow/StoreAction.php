@@ -11,11 +11,11 @@ class StoreAction
 {
     public function __invoke(StoreRequest $request, User $user): Follow
     {
-        $validated = $request->validated();
+        $followerId = Auth::id();
 
         return Follow::updateOrCreate(
             [
-                'follower_id' => $validated['user_id'],
+                'follower_id' => $followerId,
                 'followed_id' => $user->id,
             ]
         );

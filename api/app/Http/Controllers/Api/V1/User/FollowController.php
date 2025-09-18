@@ -54,6 +54,12 @@ class FollowController extends Controller
      */
     public function destroy(User $user, DestroyAction $action)
     {
-        //
+        $deleted = $action($user);
+
+        if (!$deleted) {
+            return response()->json(['message' => 'Follow not found'], 404);
+        }
+
+        return response()->noContent();
     }
 }

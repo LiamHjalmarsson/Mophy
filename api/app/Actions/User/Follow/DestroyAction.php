@@ -5,12 +5,15 @@ namespace App\Actions\User\Follow;
 use App\Http\Requests\User\Follow\StoreRequest;
 use App\Models\User;
 use App\Models\Follow;
+use Illuminate\Support\Facades\Auth;
 
 class DestroyAction
 {
-     public function __invoke(int $userId, User $user): bool
+     public function __invoke(User $user): bool
     {
-        $query = Follow::where('follower_id', $userId);
+        $followerId = Auth::id(); 
+
+        $query = Follow::where('follower_id', $followerId);
 
         $query->where('followed_id', $user->id);
 

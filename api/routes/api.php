@@ -66,5 +66,7 @@ Route::prefix('v1')->group(function () {
         Route::get('{user}/watchLater', [WatchLaterController::class, 'index']);
 
         Route::post('{user}/follow', [FollowController::class, 'store']);
+
+        Route::delete('{user}/unfollow', [FollowController::class, 'destroy']);
     });
 });

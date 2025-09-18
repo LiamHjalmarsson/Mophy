@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::withCount(['followers', 'following'])->paginate(25);
 
         return IndexResource::collection($users);
     }

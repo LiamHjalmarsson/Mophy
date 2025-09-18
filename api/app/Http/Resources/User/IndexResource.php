@@ -19,7 +19,9 @@ class IndexResource extends JsonResource
             'name' => $this->name,
             'username' => $this->username,
             'avatar' => $this->avatar,
-            'bio' => $this->bio
+            'bio' => $this->bio,
+            'followers_count' => $this->followers_count,
+            'following_count' => $this->following_count,
         ];
     }
 }

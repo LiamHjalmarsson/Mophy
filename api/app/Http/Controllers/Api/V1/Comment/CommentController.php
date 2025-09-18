@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Comment;
 
 use App\Actions\Comment\CommentLike\DestroyAction;
 use App\Actions\Comment\CommentLike\StoreAction as CommentLikeStoreAction;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Category;
 
 use App\Actions\Category\StoreAction;
 use App\Actions\Category\UpdateAction;

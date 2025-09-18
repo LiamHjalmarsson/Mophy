@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\User;
 
-use App\Actions\User\Avatar\UpdateAction as AvatarUpdateAction;
 use App\Actions\User\StoreAction;
 use App\Actions\User\UpdateAction;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\Avatar\UpdateRequest as AvatarUpdateRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\IndexResource;
@@ -68,14 +66,5 @@ class UserController extends Controller
         $user->delete();
 
         return response()->noContent();
-    }
-
-    public function updateAvatar(AvatarUpdateRequest $request, User $user, AvatarUpdateAction $action) 
-    {
-        Gate::authorize('update', $user);
-
-        $updatedUser = $action($request, $user);
-
-        return new ShowResource($updatedUser);
     }
 }

@@ -3,10 +3,15 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
-use App\Http\Controllers\Api\V1\CategoryContoller;
-use App\Http\Controllers\Api\V1\CommentController;
-use App\Http\Controllers\Api\V1\MovieController;
-use App\Http\Controllers\Api\V1\UserController;
+use App\Http\Controllers\Api\V1\Category\CategoryContoller;
+use App\Http\Controllers\Api\V1\Comment\CommentController;
+use App\Http\Controllers\Api\V1\Comment\CommentLike;
+use App\Http\Controllers\Api\V1\Comment\LikeController;
+use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
+use App\Http\Controllers\Api\V1\Movie\MovieController;
+use App\Http\Controllers\Api\V1\Movie\WatchedController;
+use App\Http\Controllers\Api\V1\User\AvatarController;
+use App\Http\Controllers\Api\V1\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,27 +33,27 @@ Route::prefix('v1')->group(function () {
     Route::prefix('comments')->group(function () {
         Route::apiResource('/', CommentController::class)->parameters(['' => 'comment']);
 
-        Route::post('{comment}/react', [CommentController::class, 'react']);
+        Route::post('{comment}/reaction', [LikeController::class, 'reaction']);
 
-        Route::delete('{comment}/removeReaction', [CommentController::class, 'removeReaction']);
+        Route::delete('{comment}/removeReaction', [LikeController::class, 'removeReaction']);
     });
 
     Route::prefix('movies')->group(function () {
         Route::apiResource('/', MovieController::class)->parameters(['' => 'movie']);
 
-        Route::post('{movie}/react', [MovieController::class, 'react']);
+        Route::post('{movie}/reaction', [MovieLikeController::class, 'reaction']);
 
-        Route::delete('{movie}/removeReaction', [MovieController::class, 'removeReaction']);
+        Route::delete('{movie}/removeReaction', [MovieLikeController::class, 'removeReaction']);
 
-        Route::post('{movie}/watched', [MovieController::class, 'watched']);
+        Route::post('{movie}/watched', [WatchedController::class, 'watched']);
 
-        Route::delete('{movie}/unWatch', [MovieController::class, 'unWatch']);
+        Route::delete('{movie}/unWatch', [WatchedController::class, 'unWatch']);
 
     });
     
     Route::prefix('users')->group(function () {
         Route::apiResource('/', UserController::class)->parameters(['' => 'user']);
 
-        Route::post('{user}/avatar', [UserController::class, 'updateAvatar']);
+        Route::post('{user}/avatar', [AvatarController::class, 'update']);
     });
 });

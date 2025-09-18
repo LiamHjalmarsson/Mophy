@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
             MovieLikeSeed::class,
             CategorySeed::class,
             CommentSeed::class,
-            CommentLikeSeed::class
-
+            CommentLikeSeed::class,
+            WatchedSeed::class
         ]);
 
         User::factory(10)->create();

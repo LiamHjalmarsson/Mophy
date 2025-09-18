@@ -25,6 +25,11 @@ class Movie extends Model
         return $this->hasMany(MovieLike::class);
     }
 
+    public function watche(): HasMany 
+    {
+        return $this->hasMany(Watched::class);
+    }
+
     public function getCoverUrlAttribute(): string
     {
         return $this->cover ? asset('storage/movie' . $this->cover) : asset('storage/defaults/movie-cover.png');

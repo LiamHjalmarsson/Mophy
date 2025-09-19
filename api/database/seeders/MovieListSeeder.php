@@ -4,10 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Movie;
 use App\Models\MovieList;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MovieListSeed extends Seeder
+class MovieListSeeder extends Seeder
 {
     /**
      * Run the database seeds.

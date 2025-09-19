@@ -2,17 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Review;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Follow;
 use Illuminate\Database\Seeder;
 
-class ReviewSeed extends Seeder
+class FollowSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Review::factory(50)->create();
+        Follow::factory(50)->create();
     }
 }

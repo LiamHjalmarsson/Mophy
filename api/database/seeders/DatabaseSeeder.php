@@ -14,18 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         $this->call([
-            MovieSeed::class,
-            MovieLikeSeed::class,
-            CategorySeed::class,
-            CommentSeed::class,
-            CommentLikeSeed::class,
-            WatchedSeed::class,
-            WatchLaterSeed::class,
-            FollowSeed::class,
-            MovieListSeed::class,
-            ReviewSeed::class
+            MovieSeeder::class,
+            MovieLikeSeeder::class,
+            CategorySeeder::class,
+            CommentSeeder::class,
+            CommentLikeSeeder::class,
+            WatchedSeeder::class,
+            WatchLaterSeeder::class,
+            FollowSeeder::class,
+            MovieListSeeder::class,
+            ReviewSeeder::class
         ]);
 
         User::factory(10)->create();

@@ -5,10 +5,9 @@ namespace Database\Seeders;
 use App\Models\Comment;
 use App\Models\Movie;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class CommentSeed extends Seeder
+class CommentSeeder extends Seeder
 {
     /**
      * Run the database seeds.

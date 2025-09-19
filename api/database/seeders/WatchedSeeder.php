@@ -4,10 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Movie;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WatchedSeed extends Seeder
+class WatchedSeeder extends Seeder
 {
     /**
      * Run the database seeds.

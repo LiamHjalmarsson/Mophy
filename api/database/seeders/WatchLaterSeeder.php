@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\WatchLater;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WatchLaterSeed extends Seeder
+class WatchLaterSeeder extends Seeder
 {
     /**
      * Run the database seeds.

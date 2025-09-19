@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api\V1\Movie;
 
 use App\Actions\Movie\Review\StoreAction;
+use App\Actions\Movie\Review\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Movie\Review\StoreRequest;
+use App\Http\Requests\Movie\Review\UpdateRequest;
 use App\Http\Resources\Movie\Review\IndexResource;
 use App\Http\Resources\Movie\Review\ShowResource;
 use App\Models\Movie;
-use Illuminate\Http\Request;
+use App\Models\Review;
 
 class ReviewController extends Controller
 {
@@ -37,24 +39,36 @@ class ReviewController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Movie $movie, Review $review)
     {
-        //
+        $review->load('user', 'movie');
+
+        return new ShowResource($review);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateRequest $request, Movie $movie, Review $review, UpdateAction $action)
     {
-        //
+        if ($review->movie_id !== $movie->id) {
+            return response()->json(['message' => 'Review not found for this movie'], 404);
+        }
+
+        $updated = $action($request, $review);
+
+        $updated->load('user', 'movie');
+
+        return new ShowResource($updated);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Movie $movie, Review $review)
     {
-        //
+        $review->delete();
+        
+        return response()->noContent();
     }
 }

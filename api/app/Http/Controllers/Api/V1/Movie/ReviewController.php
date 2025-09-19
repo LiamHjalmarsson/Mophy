@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api\V1\Movie;
 
+use App\Actions\Movie\Review\StoreAction;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Movie\Reviews\IndexResource;
+use App\Http\Requests\Movie\Review\StoreRequest;
+use App\Http\Resources\Movie\Review\IndexResource;
+use App\Http\Resources\Movie\Review\ShowResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
@@ -22,9 +25,13 @@ class ReviewController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request, Movie $movie, StoreAction $action)
     {
-        //
+        $review = $action($request, $movie);
+
+        $review->load('user', 'movie');
+
+        return new ShowResource($review);
     }
 
     /**

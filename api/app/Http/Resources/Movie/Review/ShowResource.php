@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Movie\Reviews;
+namespace App\Http\Resources\Movie\Review;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class IndexResource extends JsonResource
+class ShowResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,7 +23,10 @@ class IndexResource extends JsonResource
                 'name' => $this->user->name,
                 'username' => $this->user->username,
             ],
-            'movie_id' => $this->movie_id,
+            'movie' => [
+                'id' => $this->movie->id,
+                'title' => $this->movie->title,
+            ],
             'created_at'=> $this->created_at?->format('Y-m-d H:i'),
         ];
     }

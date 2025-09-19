@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
 use App\Http\Controllers\Api\V1\Movie\MovieController;
 use App\Http\Controllers\Api\V1\Movie\WatchedController;
 use App\Http\Controllers\Api\V1\Movie\WatchLaterController;
+use App\Http\Controllers\Api\V1\MovieList\MovieListController;
 use App\Http\Controllers\Api\V1\User\AvatarController;
 use App\Http\Controllers\Api\V1\User\FollowController;
 use App\Http\Controllers\Api\V1\User\UserController;
@@ -71,5 +72,7 @@ Route::prefix('v1')->group(function () {
         Route::get('{user}/followers', [FollowController::class, 'followers']);
         
         Route::get('{user}/following', [FollowController::class, 'following']);
+
+        Route::apiResource('{user}/movie-lists', MovieListController::class);
     });
 });

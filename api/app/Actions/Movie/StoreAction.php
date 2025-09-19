@@ -4,6 +4,7 @@ namespace App\Actions\Movie;
 
 use App\Http\Requests\Movie\StoreRequest;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Auth;
 
 class StoreAction 
 {
@@ -16,6 +17,8 @@ class StoreAction
         } else {
             $validated['cover'] = 'defaults/movie-cover.png';
         }
+
+        $validated['created_by'] = Auth::id();
 
         return Movie::create($validated);
     }

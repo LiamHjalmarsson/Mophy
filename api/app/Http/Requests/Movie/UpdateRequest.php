@@ -27,8 +27,7 @@ class UpdateRequest extends FormRequest
             'description' => 'sometimes|string',
             'release_date' => 'sometimes|date',
             'duration' => 'sometimes|integer|min:1',
-             'cover' => 'sometimes|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'created_by' => 'sometimes|exists:users,id',
+            'cover' => 'sometimes|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 }

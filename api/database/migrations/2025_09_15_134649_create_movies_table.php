@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('duration')->nullable();
             $table->date('release_date')->nullable();
             $table->string('cover')->nullable();    
-            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('created_by')->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }

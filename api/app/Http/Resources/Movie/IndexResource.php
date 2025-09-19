@@ -22,7 +22,10 @@ class IndexResource extends JsonResource
             'release_date'=> $this->release_date,
             'duration' => $this->duration,
             'cover' => $this->cover_url,
-            'created_by' => $this->created_by,
+            'creator' => [
+                'id' => $this->creator?->id,
+                'name' => $this->creator?->name,
+            ],
         ];
     }
 }

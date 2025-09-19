@@ -48,7 +48,11 @@ Route::prefix('v1')->group(function () {
     });
 
     Route::prefix('movies')->group(function () {
-        Route::apiResource('/', MovieController::class)->parameters(['' => 'movie']);
+        Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['index', 'show']);
+
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['store','update','destroy']);
+        });
 
         Route::prefix('{movie}')->group(function() {
             Route::post('reaction', [MovieLikeController::class, 'reaction']);

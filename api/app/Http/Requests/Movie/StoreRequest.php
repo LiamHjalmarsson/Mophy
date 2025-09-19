@@ -28,7 +28,6 @@ class StoreRequest extends FormRequest
             'release_date' => 'nullable|date',
             'duration' => 'nullable|integer|min:1',
             'cover' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'created_by' => 'nullable|exists:users,id',
         ];
     }
 }

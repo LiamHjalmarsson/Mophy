@@ -5,6 +5,7 @@ namespace App\Actions\Movie\MovieLike;
 use App\Http\Requests\Movie\MovieLike\StoreRequest;
 use App\Models\Movie;
 use App\Models\MovieLike;
+use Illuminate\Support\Facades\Auth;
 
 class StoreAction 
 {
@@ -14,7 +15,7 @@ class StoreAction
 
         return MovieLike::updateOrCreate(
             [
-                'user_id' => $validated["user_id"],
+                'user_id' => Auth::id(),
                 'movie_id' => $movie->id
             ],
             [

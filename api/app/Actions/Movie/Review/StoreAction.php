@@ -5,6 +5,7 @@ namespace App\Actions\Movie\Review;
 use App\Http\Requests\Movie\Review\StoreRequest;
 use App\Models\Movie;
 use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
 
 class StoreAction
 {
@@ -14,12 +15,12 @@ class StoreAction
 
         return Review::updateOrCreate(
             [
-                'user_id'  => $request->user()->id,
+                'user_id'  => Auth::id(),
                 'movie_id' => $movie->id,
             ],
             [
                 'rating' => $validated['rating'],
-                'body'   => $validated['body'] ?? null,
+                'body' => $validated['body'] ?? null,
             ]
         );
     }

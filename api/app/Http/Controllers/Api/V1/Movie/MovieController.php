@@ -19,7 +19,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Movie::all();
+        $movies = Movie::with('creator')->get();
 
         return IndexResource::collection($movies);
     }
@@ -39,6 +39,8 @@ class MovieController extends Controller
      */
     public function show(Movie $movie)
     {
+        $movie->load('creator');
+        
         return new ShowResource($movie);
     }
 

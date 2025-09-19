@@ -20,7 +20,6 @@ class UpdateAction
             $validated['cover'] = $request->file('cover')->store('covers', 'public');
         }
 
-
         $movie->update($validated);
 
         return $movie;

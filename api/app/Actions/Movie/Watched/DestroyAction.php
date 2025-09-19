@@ -15,7 +15,6 @@ class DestroyAction
 
         $query = Watched::where('user_id', $userId);
 
-
         $query->where('movie_id', $movie->id);
 
         $watched = $query->first();

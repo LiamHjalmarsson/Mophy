@@ -37,6 +37,11 @@ class Movie extends Model
         return $this->belongsToMany(MovieList::class, 'list_movies', 'movie_id', 'movie_list_id')->withTimestamps();
     }
 
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
+    }
+
     public function getCoverUrlAttribute(): string
     {
         return $this->coverUrl('movies', 'movie-cover.png');

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Movie;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Movie\Reviews\IndexResource;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -10,9 +12,11 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Movie $movie)
     {
-        //
+        $reviews = $movie->reviews()->with('user')->paginate(25);
+
+        return IndexResource::collection($reviews);
     }
 
     /**

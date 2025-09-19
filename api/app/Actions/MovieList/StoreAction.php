@@ -1,6 +1,6 @@
 <?php 
 
-namespace App\Actions\MovieLike;
+namespace App\Actions\MovieList;
 
 use App\Http\Requests\MovieList\StoreRequest;
 use App\Models\MovieList;

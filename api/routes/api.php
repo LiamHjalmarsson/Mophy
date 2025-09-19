@@ -59,20 +59,22 @@ Route::prefix('v1')->group(function () {
     Route::prefix('users')->group(function () {
         Route::apiResource('/', UserController::class)->parameters(['' => 'user']);
 
-        Route::post('{user}/avatar', [AvatarController::class, 'update']);
+        Route::prefix('{user}')->group(function () {
+            Route::post('avatar', [AvatarController::class, 'update']);
 
-        Route::get('{user}/watched', [WatchedController::class, 'index']);
+            Route::post('follow', [FollowController::class, 'store']);
 
-        Route::get('{user}/watchLater', [WatchLaterController::class, 'index']);
+            Route::get('followers', [FollowController::class, 'followers']);
 
-        Route::post('{user}/follow', [FollowController::class, 'store']);
+            Route::get('following', [FollowController::class, 'following']);
 
-        Route::delete('{user}/unfollow', [FollowController::class, 'destroy']);
+            Route::delete('unfollow', [FollowController::class, 'destroy']);
 
-        Route::get('{user}/followers', [FollowController::class, 'followers']);
-        
-        Route::get('{user}/following', [FollowController::class, 'following']);
+            Route::apiResource('movie-lists', MovieListController::class);
 
-        Route::apiResource('{user}/movie-lists', MovieListController::class);
+            Route::get('watched', [WatchedController::class, 'index']);
+
+            Route::get('watchLater', [WatchLaterController::class, 'index']);
+        });
     });
 });

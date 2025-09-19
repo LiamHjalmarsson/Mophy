@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Api\V1\MovieList;
 
+use App\Actions\MovieList\StoreAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MovieList\StoreRequest;
 use App\Http\Resources\MovieList\IndexResource;
+use App\Http\Resources\MovieList\ShowResource;
 use App\Models\MovieList;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MovieListController extends Controller
@@ -22,17 +26,29 @@ class MovieListController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request, StoreAction $action)
     {
-        //
+        $list = $action($request);
+
+        $list->load('user', 'movies');
+
+        return new ShowResource($list);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user, MovieList $movieList)
     {
-        //
+        if ($movieList->user_id !== $user->id) {
+            return response()->json([
+                'message' => 'Movie list not found for this user'
+            ], 404);
+        }
+
+        $movieList->load('movies', 'user');
+
+        return new ShowResource($movieList);
     }
 
     /**

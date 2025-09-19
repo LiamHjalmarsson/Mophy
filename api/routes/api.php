@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\Comment\LikeController;
 
 use App\Http\Controllers\Api\V1\Movie\MovieController;
 use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
+use App\Http\Controllers\Api\V1\Movie\RatingController;
 use App\Http\Controllers\Api\V1\Movie\ReviewController;
 use App\Http\Controllers\Api\V1\Movie\WatchedController;
 use App\Http\Controllers\Api\V1\Movie\WatchLaterController;
@@ -52,22 +53,26 @@ Route::prefix('v1')->group(function () {
 
         Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['store','update','destroy']);
-        });
-
-        Route::prefix('{movie}')->group(function() {
-            Route::post('reaction', [MovieLikeController::class, 'reaction']);
             
-            Route::delete('removeReaction', [MovieLikeController::class, 'removeReaction']);
-
-            Route::apiResource('reviews', ReviewController::class);
-            
-            Route::post('watched', [WatchedController::class, 'watched']);
-            
-            Route::delete('unWatch', [WatchedController::class, 'unWatch']);
-            
-            Route::post('watchLater', [WatchLaterController::class, 'store']);
-            
-            Route::delete('watchLater', [WatchLaterController::class, 'destroy']);
+            Route::prefix('{movie}')->group(function() {
+                Route::post('reaction', [MovieLikeController::class, 'reaction']);
+                
+                Route::delete('removeReaction', [MovieLikeController::class, 'removeReaction']);
+    
+                Route::apiResource('reviews', ReviewController::class);
+                
+                Route::post('watched', [WatchedController::class, 'watched']);
+                
+                Route::delete('unWatch', [WatchedController::class, 'unWatch']);
+                
+                Route::post('watchLater', [WatchLaterController::class, 'store']);
+                
+                Route::delete('watchLater', [WatchLaterController::class, 'destroy']);
+    
+                Route::post('rating', [RatingController::class, 'store']);
+                
+                Route::delete('rating', [RatingController::class, 'destroy']);
+            });
         });
     });
     

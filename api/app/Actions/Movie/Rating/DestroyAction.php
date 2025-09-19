@@ -13,8 +13,12 @@ class DestroyAction
 
         $query->where('movie_id', $movie->id);
 
-        $rating = $query->delete();
+        $rating = $query->first();
 
-        return (bool) $rating;
+        if(!$rating) {
+            return false;
+        }
+
+        return (bool) $rating->delete();
     }
 }

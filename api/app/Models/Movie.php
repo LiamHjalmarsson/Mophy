@@ -53,6 +53,11 @@ class Movie extends Model
         return $this->hasMany(Rating::class);
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorit::class);
+    }
+
     public function getCoverUrlAttribute(): string
     {
         return $this->coverUrl('movies', 'movie-cover.png');

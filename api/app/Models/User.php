@@ -75,6 +75,16 @@ class User extends Authenticatable
         return $this->hasMany(Watched::class);
     }
 
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorit::class);
+    }
+
+    public function favoriteMovies()
+    {
+        return $this->belongsToMany(Movie::class, 'favorites')->withTimestamps();
+    }
+
     public function followers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'follows', 'followed_id', 'follower_id');

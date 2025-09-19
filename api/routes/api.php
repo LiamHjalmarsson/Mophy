@@ -3,17 +3,23 @@
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
+
 use App\Http\Controllers\Api\V1\Category\CategoryContoller;
+
 use App\Http\Controllers\Api\V1\Comment\CommentController;
 use App\Http\Controllers\Api\V1\Comment\LikeController;
-use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
+
 use App\Http\Controllers\Api\V1\Movie\MovieController;
+use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
 use App\Http\Controllers\Api\V1\Movie\WatchedController;
 use App\Http\Controllers\Api\V1\Movie\WatchLaterController;
+
 use App\Http\Controllers\Api\V1\MovieList\MovieListController;
+
 use App\Http\Controllers\Api\V1\User\AvatarController;
 use App\Http\Controllers\Api\V1\User\FollowController;
 use App\Http\Controllers\Api\V1\User\UserController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -60,18 +66,22 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('/', UserController::class)->parameters(['' => 'user']);
 
         Route::prefix('{user}')->group(function () {
-            Route::post('avatar', [AvatarController::class, 'update']);
+            Route::middleware('auth:sanctum')->group(function () {
+                Route::post('avatar', [AvatarController::class, 'update']);
+                
+                Route::apiResource('movie-lists', MovieListController::class)->only(['store', 'update', 'destroy']);
+            });
 
             Route::post('follow', [FollowController::class, 'store']);
+
+            Route::delete('unfollow', [FollowController::class, 'destroy']);
 
             Route::get('followers', [FollowController::class, 'followers']);
 
             Route::get('following', [FollowController::class, 'following']);
 
-            Route::delete('unfollow', [FollowController::class, 'destroy']);
-
-            Route::apiResource('movie-lists', MovieListController::class);
-
+            Route::apiResource('movie-lists', MovieListController::class)->only(['index', 'show']);
+            
             Route::get('watched', [WatchedController::class, 'index']);
 
             Route::get('watchLater', [WatchLaterController::class, 'index']);

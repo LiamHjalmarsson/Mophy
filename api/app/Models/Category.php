@@ -23,6 +23,6 @@ class Category extends Model
 
     public function getCoverUrlAttribute(): string
     {
-        return $this->cover ? asset('storage/category' . $this->cover) : asset('storage/defaults/category-cover.png');
+        return $this->coverUrl('categories', 'category-cover.png');
     }
 }

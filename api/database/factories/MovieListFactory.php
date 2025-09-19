@@ -18,9 +18,9 @@ class MovieListFactory extends Factory
     public function definition(): array
     {
         return [
+            'user_id' => User::factory(),
             'title' => fake()->words(3, true),
             'description' => fake()->sentence(),
-            'user_id' => User::factory(),
         ];
     }
 }

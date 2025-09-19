@@ -104,6 +104,6 @@ class User extends Authenticatable
         
         $watchLater = $query->withTimestamps();
 
-        return $watchLater ;
+        return $watchLater;
     }
 }

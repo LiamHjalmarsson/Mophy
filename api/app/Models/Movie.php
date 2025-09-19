@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasCover;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Movie extends Model
 {
-    use HasFactory;
+    use HasFactory, HasCover;
 
     protected $fillable = [
         'tmdb_id',
@@ -38,6 +39,6 @@ class Movie extends Model
 
     public function getCoverUrlAttribute(): string
     {
-        return $this->cover ? asset('storage/movie' . $this->cover) : asset('storage/defaults/movie-cover.png');
+        return $this->coverUrl('movies', 'movie-cover.png');
     }
 }

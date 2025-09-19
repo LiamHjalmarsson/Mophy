@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\V1\Comment\LikeController;
 
 use App\Http\Controllers\Api\V1\Movie\MovieController;
 use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
+use App\Http\Controllers\Api\V1\Movie\ReviewController;
 use App\Http\Controllers\Api\V1\Movie\WatchedController;
 use App\Http\Controllers\Api\V1\Movie\WatchLaterController;
 
@@ -49,28 +50,30 @@ Route::prefix('v1')->group(function () {
     Route::prefix('movies')->group(function () {
         Route::apiResource('/', MovieController::class)->parameters(['' => 'movie']);
 
-        Route::post('{movie}/reaction', [MovieLikeController::class, 'reaction']);
+        Route::prefix('{movie}')->group(function() {
+            Route::post('reaction', [MovieLikeController::class, 'reaction']);
+            
+            Route::delete('removeReaction', [MovieLikeController::class, 'removeReaction']);
 
-        Route::delete('{movie}/removeReaction', [MovieLikeController::class, 'removeReaction']);
-
-        Route::post('{movie}/watched', [WatchedController::class, 'watched']);
-
-        Route::delete('{movie}/unWatch', [WatchedController::class, 'unWatch']);
-
-        Route::post('{movie}/watchLater', [WatchLaterController::class, 'store']);
-
-        Route::delete('{movie}/watchLater', [WatchLaterController::class, 'destroy']);
+            Route::apiResource('reviews', ReviewController::class);
+            
+            Route::post('watched', [WatchedController::class, 'watched']);
+            
+            Route::delete('unWatch', [WatchedController::class, 'unWatch']);
+            
+            Route::post('watchLater', [WatchLaterController::class, 'store']);
+            
+            Route::delete('watchLater', [WatchLaterController::class, 'destroy']);
+        });
     });
     
     Route::prefix('users')->group(function () {
         Route::apiResource('/', UserController::class)->parameters(['' => 'user']);
 
         Route::prefix('{user}')->group(function () {
-            Route::middleware('auth:sanctum')->group(function () {
-                Route::post('avatar', [AvatarController::class, 'update']);
+            Route::post('avatar', [AvatarController::class, 'update']);
                 
-                Route::apiResource('movie-lists', MovieListController::class)->only(['store', 'update', 'destroy']);
-            });
+            Route::apiResource('movie-lists', MovieListController::class);
 
             Route::post('follow', [FollowController::class, 'store']);
 
@@ -80,7 +83,7 @@ Route::prefix('v1')->group(function () {
 
             Route::get('following', [FollowController::class, 'following']);
 
-            Route::apiResource('movie-lists', MovieListController::class)->only(['index', 'show']);
+            Route::apiResource('movie-lists', MovieListController::class);
             
             Route::get('watched', [WatchedController::class, 'index']);
 

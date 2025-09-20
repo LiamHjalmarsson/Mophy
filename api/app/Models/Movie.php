@@ -53,9 +53,9 @@ class Movie extends Model
         return $this->hasMany(Rating::class);
     }
 
-    public function favorites()
+    public function favoritedBy()
     {
-        return $this->hasMany(Favorit::class);
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 
     public function getCoverUrlAttribute(): string

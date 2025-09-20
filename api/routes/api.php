@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\V1\Category\CategoryContoller;
 
 use App\Http\Controllers\Api\V1\Comment\CommentController;
 use App\Http\Controllers\Api\V1\Comment\LikeController;
-
+use App\Http\Controllers\Api\V1\Movie\FavoriteController;
 use App\Http\Controllers\Api\V1\Movie\MovieController;
 use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
 use App\Http\Controllers\Api\V1\Movie\RatingController;
@@ -72,6 +72,10 @@ Route::prefix('v1')->group(function () {
                 Route::post('rating', [RatingController::class, 'store']);
                 
                 Route::delete('rating', [RatingController::class, 'destroy']);
+
+                Route::post('favorite', [FavoriteController::class, 'store']);
+                
+                Route::delete('favorite', [FavoriteController::class, 'destroy']);
             });
         });
     });
@@ -83,6 +87,8 @@ Route::prefix('v1')->group(function () {
             Route::post('avatar', [AvatarController::class, 'update']);
                 
             Route::apiResource('movie-lists', MovieListController::class);
+
+            Route::get('favorite', [FavoriteController::class, 'index']);
 
             Route::post('follow', [FollowController::class, 'store']);
 

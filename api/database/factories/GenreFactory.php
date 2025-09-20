@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class CategoryFactory extends Factory
+class GenreFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,7 +19,7 @@ class CategoryFactory extends Factory
         return [
             'name' => fake()->unique()->word(),
             'description' => fake()->sentence(),
-            'cover' => fake()->imageUrl(640, 480, 'categories', true)
+            'cover' => fake()->imageUrl(640, 480, 'genres', true)
         ];
     }
 }

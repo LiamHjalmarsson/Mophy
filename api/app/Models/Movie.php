@@ -28,6 +28,11 @@ class Movie extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function genres(): BelongsToMany
+    {
+        return $this->belongsToMany(Genre::class, 'genre_movie')->withTimestamps();
+    }
+
     public function likes(): HasMany
     {
         return $this->hasMany(MovieLike::class);

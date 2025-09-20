@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Genre;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|unique:categories,name',
-            'description' => 'nullable|string',
-            'cover' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'name' => 'sometimes|string|max:255|unique:genres,name',
+            'description' => 'sometimes|string',
+            'cover' => 'sometimes|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 }

@@ -4,10 +4,11 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 
-use App\Http\Controllers\Api\V1\Category\CategoryContoller;
+use App\Http\Controllers\Api\V1\Genre\GenreContoller;
 
 use App\Http\Controllers\Api\V1\Comment\CommentController;
 use App\Http\Controllers\Api\V1\Comment\LikeController;
+
 use App\Http\Controllers\Api\V1\Movie\FavoriteController;
 use App\Http\Controllers\Api\V1\Movie\MovieController;
 use App\Http\Controllers\Api\V1\Movie\LikeController as MovieLikeController;
@@ -38,7 +39,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('categories', CategoryContoller::class);
+    Route::apiResource('genres', GenreContoller::class);
 
     Route::prefix('comments')->group(function () {
         Route::apiResource('/', CommentController::class)->parameters(['' => 'comment']);

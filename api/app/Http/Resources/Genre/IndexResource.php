@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Category;
+namespace App\Http\Resources\Genre;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -19,19 +19,6 @@ class IndexResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'cover' => $this->cover_url,
-            'movies' => $this->categoryMovies()
         ];
-    }
-
-    private function categoryMovies(): mixed
-    {
-        return $this->whenLoaded('movies', function () {
-            return $this->movies->map(function ($movie) {
-                return [
-                    'id' => $movie->id,
-                    'title' => $movie->title,
-                ];
-            });
-        });
     }
 }

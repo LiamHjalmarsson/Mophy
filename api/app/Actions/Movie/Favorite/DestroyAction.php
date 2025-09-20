@@ -10,12 +10,13 @@ class DestroyAction
 {
     public function __invoke(Movie $movie): bool
     {
-        $query = Favorite::where('user_id', Auth::id())
-            ->where('movie_id', $movie->id);
+        $query = Favorite::where('user_id', Auth::id());
+
+        $query->where('movie_id', $movie->id);
 
         $favorite = $query->first();
 
-        if (! $favorite) {
+        if (!$favorite) {
             return false;
         }
 

@@ -15,7 +15,8 @@ class MovieList extends Model
         'title',
         'description',
         'user_id',
-        'cover'
+        'cover',
+        'is_public'
     ];
 
     public function user(): BelongsTo

@@ -39,15 +39,17 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('genres', GenreController::class);
-
     Route::prefix('comments')->group(function () {
-        Route::apiResource('/', CommentController::class)->parameters(['' => 'comment']);
-
-        Route::post('{comment}/reaction', [CommentLikeController::class, 'store']);
-
-        Route::delete('{comment}/removeReaction', [CommentLikeController::class, 'destroy']);
+        Route::apiResource('/', CommentController::class)->parameters(['' => 'comment'])->only(['index', 'show']);
+        
+        Route::middleware('auth:sanctum')->group(function () { 
+            Route::apiResource('/', CommentController::class)->parameters(['' => 'comment'])->only(['store', 'update', 'destroy']);
+            
+            Route::apiResource('{comment}/reaction', CommentLikeController::class)->only(['store', 'destroy']);
+        });
     });
+    
+    Route::apiResource('genres', GenreController::class);
 
     Route::prefix('movies')->group(function () {
         Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['index', 'show']);

@@ -23,7 +23,7 @@ class ShowResource extends JsonResource
                 'username' => $this->user->username
             ],
             'movie_id' => $this->movie_id,
-            'likes_count'    => $this->likes_count ?? 0,
+            'likes_count' => $this->likes_count ?? 0,
             'dislikes_count' => $this->dislikes_count ?? 0,
             'created_at' => $this->created_at?->format('Y-m-d H:i'),
         ];

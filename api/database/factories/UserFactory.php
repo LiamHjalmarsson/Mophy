@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'username' => fake()->unique()->userName(),
             'country' => fake()->country(),
             'bio' => fake()->paragraph(),
+            'is_admin' => fake()->boolean(),
             'remember_token' => Str::random(10),
         ];
     }

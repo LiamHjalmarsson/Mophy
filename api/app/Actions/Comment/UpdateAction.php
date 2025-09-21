@@ -11,6 +11,8 @@ class UpdateAction
     {
         $validated = $request->validated();
 
+        unset($validated['user_id']);
+
         $comment->update($validated);
 
         return $comment;

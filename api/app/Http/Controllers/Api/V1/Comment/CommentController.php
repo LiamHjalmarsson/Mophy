@@ -30,6 +30,8 @@ class CommentController extends Controller
     {
         $comment = $action($request);
 
+        $comment->load('user', 'movie');
+
         return new ShowResource($comment);
     }
 

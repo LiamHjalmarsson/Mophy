@@ -23,7 +23,7 @@ class LikeController extends Controller
 
     public function destroy(Movie $movie, DestroyAction $action)
     {
-        $deleted = $action(Auth::id(), $movie);
+        $deleted = $action($movie);
 
         if (!$deleted) {
             return response()->json(['message' => 'Reaction not found'], 404);

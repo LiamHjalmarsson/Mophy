@@ -23,7 +23,6 @@ class StoreRequest extends FormRequest
     {
         return [
             'body' => 'required|string',
-            'user_id' => 'required|exists:users,id',
             'movie_id' => 'required|exists:movies,id',
         ];
     }

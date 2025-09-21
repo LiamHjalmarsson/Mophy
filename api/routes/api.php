@@ -7,7 +7,7 @@ use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Genre\GenreController;
 
 use App\Http\Controllers\Api\V1\Comment\CommentController;
-use App\Http\Controllers\Api\V1\Comment\LikeController;
+use App\Http\Controllers\Api\V1\Comment\CommentLikeController;
 
 use App\Http\Controllers\Api\V1\Movie\FavoriteController;
 use App\Http\Controllers\Api\V1\Movie\MovieController;
@@ -44,9 +44,9 @@ Route::prefix('v1')->group(function () {
     Route::prefix('comments')->group(function () {
         Route::apiResource('/', CommentController::class)->parameters(['' => 'comment']);
 
-        Route::post('{comment}/reaction', [LikeController::class, 'reaction']);
+        Route::post('{comment}/reaction', [CommentLikeController::class, 'store']);
 
-        Route::delete('{comment}/removeReaction', [LikeController::class, 'removeReaction']);
+        Route::delete('{comment}/removeReaction', [CommentLikeController::class, 'destroy']);
     });
 
     Route::prefix('movies')->group(function () {

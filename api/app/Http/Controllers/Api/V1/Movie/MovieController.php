@@ -19,7 +19,7 @@ class MovieController extends Controller
      */
     public function index()
     {
-        $movies = Movie::with('creator')->get();
+        $movies = Movie::with('creator')->paginate(25);
 
         return IndexResource::collection($movies);
     }

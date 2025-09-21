@@ -10,9 +10,9 @@ use App\Http\Resources\Comment\CommentLike\ShowResource;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 
-class LikeController extends Controller
+class CommentLikeController extends Controller
 {
-    public function reaction(StoreRequest $request, Comment $comment, StoreAction $action) 
+    public function store(StoreRequest $request, Comment $comment, StoreAction $action) 
     {
         $like = $action($request, $comment);
         
@@ -21,9 +21,9 @@ class LikeController extends Controller
         return new ShowResource($like);
     }
 
-    public function removeReaction(Comment $comment, DestroyAction $action) 
+    public function destroy(Comment $comment, DestroyAction $action) 
     {
-        $deleted = $action(Auth::id(), $comment);
+        $deleted = $action($comment);
 
         if (!$deleted) {
             return response()->json(['message' => 'Reaction not found'], 404);

@@ -13,7 +13,7 @@ use App\Models\Genre;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
-class GenreContoller extends Controller
+class GenreController extends Controller
 {
     /**
      * Display a listing of the resource.

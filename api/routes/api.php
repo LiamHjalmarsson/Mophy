@@ -4,7 +4,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\Auth\LogoutController;
 use App\Http\Controllers\Api\Auth\RegisterController;
 
-use App\Http\Controllers\Api\V1\Genre\GenreContoller;
+use App\Http\Controllers\Api\V1\Genre\GenreController;
 
 use App\Http\Controllers\Api\V1\Comment\CommentController;
 use App\Http\Controllers\Api\V1\Comment\LikeController;
@@ -39,7 +39,7 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('genres', GenreContoller::class);
+    Route::apiResource('genres', GenreController::class);
 
     Route::prefix('comments')->group(function () {
         Route::apiResource('/', CommentController::class)->parameters(['' => 'comment']);
@@ -60,21 +60,13 @@ Route::prefix('v1')->group(function () {
     
                 Route::apiResource('reviews', ReviewController::class);
                 
-                Route::post('watched', [WatchedController::class, 'watched']);
-                
-                Route::delete('unWatch', [WatchedController::class, 'unWatch']);
-                
-                Route::post('watchLater', [WatchLaterController::class, 'store']);
-                
-                Route::delete('watchLater', [WatchLaterController::class, 'destroy']);
-    
-                Route::post('rating', [RatingController::class, 'store']);
-                
-                Route::delete('rating', [RatingController::class, 'destroy']);
+                Route::apiResource('watched', WatchedController::class)->only(['store', 'destroy']);
 
-                Route::post('favorite', [FavoriteController::class, 'store']);
+                Route::apiResource('watch-later', WatchLaterController::class)->only(['store', 'destroy']);
                 
-                Route::delete('favorite', [FavoriteController::class, 'destroy']);
+                Route::apiResource('rating', RatingController::class)->only(['store', 'destroy']);
+
+                Route::apiResource('favorite', FavoriteController::class)->only(['store', 'destroy']);
             });
         });
     });
@@ -101,7 +93,7 @@ Route::prefix('v1')->group(function () {
             
             Route::get('watched', [WatchedController::class, 'index']);
 
-            Route::get('watchLater', [WatchLaterController::class, 'index']);
+            Route::get('watch-later', [WatchLaterController::class, 'index']);
         });
     });
 });

@@ -21,7 +21,7 @@ class WatchedController extends Controller
         return IndexResource::collection($movies);
     }
 
-    public function watched(StoreRequest $request, Movie $movie, StoreAction $action)
+    public function store(StoreRequest $request, Movie $movie, StoreAction $action)
     {
         $watched = $action($request, $movie);
 
@@ -34,7 +34,7 @@ class WatchedController extends Controller
         return new ShowResource($watched);
     }
 
-    public function unWatch(Movie $movie, DestroyAction $action) 
+    public function destroy(Movie $movie, DestroyAction $action) 
     {
         $deleted = $action(Auth::id(), $movie);
 

@@ -81,9 +81,9 @@ Route::prefix('v1')->group(function () {
         Route::middleware('auth:sanctum')->apiResource('/', UserController::class)->parameters(['' => 'user'])->only(['store', 'update', 'destroy']);
 
         Route::prefix('{user}')->group(function () {                
-            Route::apiResource('movie-lists', MovieListController::class);
+            Route::apiResource('movie-lists', MovieListController::class)->only(['index', 'show']);
 
-            Route::get('favorite', [FavoriteController::class, 'index']);
+            Route::get('favorite', [FavoriteController::class, 'index', 'destroy']);
 
             Route::get('followers', [FollowController::class, 'followers']);
 
@@ -92,15 +92,19 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('movie-lists', MovieListController::class)->only(['index', 'show']);
             
             Route::get('watched', [WatchedController::class, 'index']);
-
+            
             Route::get('watch-later', [WatchLaterController::class, 'index']);
-
+            
             Route::middleware('auth:sanctum')->group(function () {
                 Route::post('avatar', [AvatarController::class, 'update']);
-
+                
                 Route::post('follow', [FollowController::class, 'store']);
-
+                
                 Route::delete('unfollow', [FollowController::class, 'destroy']);
+
+                Route::delete('watched/{watched}', [WatchedController::class, 'destroy']);
+
+                Route::delete('watch-later/{watchLater}', [WatchLaterController::class, 'destroy']);
 
                 Route::apiResource('movie-lists', MovieListController::class)->only(['store', 'update', 'destroy']);
             });

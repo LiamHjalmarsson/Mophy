@@ -20,6 +20,7 @@ class ShowResource extends JsonResource
             'type' => $this->type, 
             'user' => [
                 'id' => $this->user->id,
+                'name' => $this->user->name,
                 'username' => $this->user->username,
             ],
             'created_at' => $this->created_at_formatted,

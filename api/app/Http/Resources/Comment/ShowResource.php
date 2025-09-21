@@ -15,13 +15,17 @@ class ShowResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'body' => $this->body,
             'user' => [
                 'id' => $this->user->id,
+                'name' => $this->user->name,
                 'username' => $this->user->username
             ],
             'movie_id' => $this->movie_id,
-            'created_at' => $this->created_at_formatted
+            'likes_count'    => $this->likes_count ?? 0,
+            'dislikes_count' => $this->dislikes_count ?? 0,
+            'created_at' => $this->created_at?->format('Y-m-d H:i'),
         ];
     }
 }

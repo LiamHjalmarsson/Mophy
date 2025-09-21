@@ -26,6 +26,17 @@ class ShowResource extends JsonResource
                 'id' => $this->creator?->id,
                 'name' => $this->creator?->name,
             ],
+            'genres' => $this->genres()
         ];
+    }
+
+    private function genres(): mixed
+    {
+        return $this->genres->map(function ($genre) {
+            return [
+                'id' => $genre->id,
+                'title' => $genre->title
+            ];
+        });
     }
 }

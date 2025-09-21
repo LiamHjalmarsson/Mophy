@@ -23,6 +23,10 @@ class ShowResource extends JsonResource
                 'name' => $this->user->name,
                 'username' => $this->user->username,
             ],
+            'movie' => [
+                'id'    => $this->movie->id,
+                'title' => $this->movie->title,
+            ],
             'created_at' => $this->created_at?->format('Y-m-d H:i'),
         ];
     }

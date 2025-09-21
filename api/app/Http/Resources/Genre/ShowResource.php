@@ -19,11 +19,11 @@ class ShowResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'cover' => $this->cover_url,
-            'movies' => $this->genreMovies(),
+            'movies' => $this->movies(),
         ];
     }
 
-    private function genreMovies(): mixed
+    private function movies(): mixed
     {
         return $this->movies->map(function ($movie) {
             return [

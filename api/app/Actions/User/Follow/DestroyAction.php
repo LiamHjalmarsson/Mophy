@@ -11,9 +11,7 @@ class DestroyAction
 {
      public function __invoke(User $user): bool
     {
-        $followerId = Auth::id(); 
-
-        $query = Follow::where('follower_id', $followerId);
+        $query = Follow::where('follower_id', Auth::id());
 
         $query->where('followed_id', $user->id);
 

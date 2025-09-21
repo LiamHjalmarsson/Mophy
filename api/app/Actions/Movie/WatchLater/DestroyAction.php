@@ -4,16 +4,13 @@ namespace App\Actions\Movie\WatchLater;
 
 use App\Models\Movie;
 use App\Models\WatchLater;
+use Illuminate\Support\Facades\Auth;
 
 class DestroyAction 
 {
-    public function __invoke(?int $userId, Movie $movie): bool
+    public function __invoke(Movie $movie): bool
     {
-        if (!$userId) {
-            return false;
-        }
-
-        $query = WatchLater::where('user_id', $userId);
+        $query = WatchLater::where('user_id', Auth::id());
 
         $query->where('movie_id', $movie->id);
 

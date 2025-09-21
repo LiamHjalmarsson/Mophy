@@ -22,7 +22,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'avatar' => 'required|image|mimes:png,jpg,gif|max:2048',
+            'avatar' => 'required|image|mimes:png,jpg,gif,webp|max:2048',
         ];
     }
 }

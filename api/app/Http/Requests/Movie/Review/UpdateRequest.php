@@ -23,7 +23,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'rating' => 'sometimes|integer|min:1|max:10',
-            'body' => 'nullable|string',
+            'body' => 'sometimes|string',
         ];
     }
 }

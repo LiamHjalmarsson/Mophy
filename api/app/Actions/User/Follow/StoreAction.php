@@ -11,11 +11,9 @@ class StoreAction
 {
     public function __invoke(StoreRequest $request, User $user): Follow
     {
-        $followerId = Auth::id();
-
         return Follow::updateOrCreate(
             [
-                'follower_id' => $followerId,
+                'follower_id' => Auth::id(),
                 'followed_id' => $user->id,
             ]
         );

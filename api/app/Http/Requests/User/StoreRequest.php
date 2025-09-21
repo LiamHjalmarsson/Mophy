@@ -28,7 +28,8 @@ class StoreRequest extends FormRequest
             'username' => 'nullable|string|unique:users,username',
             'country' => 'nullable|string',
             'bio' => 'nullable|string',
-            'avatar' => 'nullable|image|mimes:png,jpg,gif|max:2048',
+            'age' => 'nullable|integer|min:1',
+            'avatar' => 'nullable|image|mimes:png,jpg,gif,webp|max:2048',
         ];
     }
 }

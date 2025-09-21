@@ -28,6 +28,7 @@ class UpdateRequest extends FormRequest
             'username' => 'sometimes|string|unique:users,username,' . $this->user->id,
             'country' => 'sometimes|string',
             'bio' => 'sometimes|string',
+            'age' => 'nullable|integer|min:1',
         ];
     }
 }

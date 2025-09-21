@@ -5,6 +5,7 @@ namespace App\Actions\Comment\CommentLike;
 use App\Http\Requests\Comment\CommentLike\StoreRequest;
 use App\Models\Comment;
 use App\Models\CommentLike;
+use Illuminate\Support\Facades\Auth;
 
 class StoreAction 
 {
@@ -14,7 +15,7 @@ class StoreAction
 
         return CommentLike::updateOrCreate(
             [
-                'user_id' => $validated['user_id'],
+                'user_id' => Auth::id(),
                 'comment_id' => $comment->id,
             ],
             [

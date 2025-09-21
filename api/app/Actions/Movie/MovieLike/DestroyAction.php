@@ -4,16 +4,13 @@ namespace App\Actions\Movie\MovieLike;
 
 use App\Models\Movie;
 use App\Models\MovieLike;
+use Illuminate\Support\Facades\Auth;
 
 class DestroyAction 
 {
-    public function __invoke(?int $userId, Movie $movie): bool
+    public function __invoke(Movie $movie): bool
     {
-        if (!$userId) {
-            return false;
-        }
-
-        $query = MovieLike::where('user_id', $userId);
+        $query = MovieLike::where('user_id', Auth::id());
 
         $query->where('movie_id', $movie->id);
 

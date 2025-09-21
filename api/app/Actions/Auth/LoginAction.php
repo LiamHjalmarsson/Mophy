@@ -12,7 +12,7 @@ class LoginAction
 {
     private $request;
 
-    public function __invoke(LoginRequest $request, bool $spa = false)
+    public function __invoke(LoginRequest $request, bool $spa = false): array
     {
         $this->request = $request;
 

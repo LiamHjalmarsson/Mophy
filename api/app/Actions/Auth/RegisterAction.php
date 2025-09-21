@@ -15,6 +15,7 @@ class RegisterAction
 
         $user = User::create([
             'name' => $validated['name'],
+            'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
@@ -23,6 +24,8 @@ class RegisterAction
             Auth::login($user);
 
             $request->session()->regenerate();
+
+            return ['message' => 'Registration successful', 'user' => $user];
         } else {
             $token = $user->createToken('laravel_api_token')->plainTextToken;
             

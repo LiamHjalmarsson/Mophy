@@ -4,16 +4,13 @@ namespace App\Actions\Comment\CommentLike;
 
 use App\Models\Comment;
 use App\Models\CommentLike;
+use Illuminate\Support\Facades\Auth;
 
 class DestroyAction 
 {
-    public function __invoke(?int $userId, Comment $comment): bool
+    public function __invoke(Comment $comment): bool
     {
-        if (!$userId) {
-            return false;
-        }
-
-        $query = CommentLike::where('user_id', $userId);
+        $query = CommentLike::where('user_id', Auth::id());
 
         $query->where('comment_id', $comment->id);
             

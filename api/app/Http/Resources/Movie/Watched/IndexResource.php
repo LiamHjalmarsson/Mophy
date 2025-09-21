@@ -21,7 +21,16 @@ class IndexResource extends JsonResource
             'description' => $this->description,
             'duration' => $this->duration,
             'cover_url' => $this->cover_url,
-            'watched_at' => $this->pivot?->watched_at?->format('Y-m-d H:i'),
+            'watched_at' => $this->formatDate($this->pivot?->watched_at),
         ];
+    }
+
+    protected function formatDate($value, string $format = 'Y-m-d H:i'): ?string
+    {
+        if (! $value) {
+            return null;
+        }
+
+        return $value instanceof Carbon ? $value->format($format) : Carbon::parse($value)->format($format);
     }
 }

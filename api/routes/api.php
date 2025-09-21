@@ -53,7 +53,6 @@ Route::prefix('v1')->group(function () {
 
     Route::middleware('auth:sanctum')->apiResource('genres', GenreController::class)->only(['store', 'update', 'destroy']);
 
-
     Route::prefix('movies')->group(function () {
         Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['index', 'show']);
 
@@ -77,28 +76,34 @@ Route::prefix('v1')->group(function () {
     });
     
     Route::prefix('users')->group(function () {
-        Route::apiResource('/', UserController::class)->parameters(['' => 'user']);
+        Route::apiResource('/', UserController::class)->parameters(['' => 'user'])->only('index', 'show');
 
-        Route::prefix('{user}')->group(function () {
-            Route::post('avatar', [AvatarController::class, 'update']);
-                
+        Route::middleware('auth:sanctum')->apiResource('/', UserController::class)->parameters(['' => 'user'])->only(['store', 'update', 'destroy']);
+
+        Route::prefix('{user}')->group(function () {                
             Route::apiResource('movie-lists', MovieListController::class);
 
             Route::get('favorite', [FavoriteController::class, 'index']);
-
-            Route::post('follow', [FollowController::class, 'store']);
-
-            Route::delete('unfollow', [FollowController::class, 'destroy']);
 
             Route::get('followers', [FollowController::class, 'followers']);
 
             Route::get('following', [FollowController::class, 'following']);
 
-            Route::apiResource('movie-lists', MovieListController::class);
+            Route::apiResource('movie-lists', MovieListController::class)->only(['index', 'show']);
             
             Route::get('watched', [WatchedController::class, 'index']);
 
             Route::get('watch-later', [WatchLaterController::class, 'index']);
+
+            Route::middleware('auth:sanctum')->group(function () {
+                Route::post('avatar', [AvatarController::class, 'update']);
+
+                Route::post('follow', [FollowController::class, 'store']);
+
+                Route::delete('unfollow', [FollowController::class, 'destroy']);
+
+                Route::apiResource('movie-lists', MovieListController::class)->only(['store', 'update', 'destroy']);
+            });
         });
     });
 });

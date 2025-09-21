@@ -64,13 +64,13 @@ class FollowController extends Controller
     }
 
     public function followers(User $user) {
-        $followers = $user->followers()->paginate(25);
+        $followers = $user->followers()->with(['follower:id,username'])->paginate(25);
 
         return ShowResource::collection($followers);
     }
 
     public function following(User $user) {
-        $following = $user->following()->paginate(25);
+        $following = $user->following()->with(['followed:id,username'])->paginate(25);
 
         return ShowResource::collection($following);
     } 

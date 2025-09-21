@@ -30,7 +30,7 @@ class GenreController extends Controller
      */
     public function store(StoreRequest $request, StoreAction $action)
     {
-        Gate::authorize('create', User::class);
+        Gate::authorize('create', Genre::class);
 
         $genre = $action($request);
 
@@ -52,7 +52,7 @@ class GenreController extends Controller
      */
     public function update(UpdateRequest $request, Genre $genre, UpdateAction $action)
     {
-        Gate::authorize('update', User::class);
+        Gate::authorize('update',  $genre);
 
         $updatedGenre = $action($request, $genre);
 
@@ -64,7 +64,7 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        Gate::authorize('destroy', User::class);
+        Gate::authorize('delete', $genre);
 
         $genre->delete();
 

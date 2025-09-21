@@ -49,7 +49,10 @@ Route::prefix('v1')->group(function () {
         });
     });
     
-    Route::apiResource('genres', GenreController::class);
+    Route::apiResource('genres', GenreController::class)->only(['index', 'show']);
+
+    Route::middleware('auth:sanctum')->apiResource('genres', GenreController::class)->only(['store', 'update', 'destroy']);
+
 
     Route::prefix('movies')->group(function () {
         Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['index', 'show']);

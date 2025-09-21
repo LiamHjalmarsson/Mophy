@@ -56,9 +56,7 @@ Route::prefix('v1')->group(function () {
             Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['store','update','destroy']);
             
             Route::prefix('{movie}')->group(function() {
-                Route::post('reaction', [MovieLikeController::class, 'reaction']);
-                
-                Route::delete('removeReaction', [MovieLikeController::class, 'removeReaction']);
+                Route::apiResource('reaction', MovieLikeController::class)->only(['store', 'destroy']);
     
                 Route::apiResource('reviews', ReviewController::class);
                 

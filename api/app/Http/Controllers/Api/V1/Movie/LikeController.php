@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
-    public function reaction(StoreRequest $request, Movie $movie, StoreAction $action) 
+    public function store(StoreRequest $request, Movie $movie, StoreAction $action) 
     {
         $like = $action($request, $movie);
 
@@ -21,7 +21,7 @@ class LikeController extends Controller
         return new ShowResource($like);
     }
 
-    public function removeReaction(Movie $movie, DestroyAction $action)
+    public function destroy(Movie $movie, DestroyAction $action)
     {
         $deleted = $action(Auth::id(), $movie);
 

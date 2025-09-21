@@ -28,6 +28,12 @@ class Movie extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
+    }
+
     public function genres(): BelongsToMany
     {
         return $this->belongsToMany(Genre::class, 'genre_movie')->withTimestamps();
@@ -56,11 +62,6 @@ class Movie extends Model
     public function ratings(): HasMany
     {
         return $this->hasMany(Rating::class);
-    }
-
-    public function favoritedBy()
-    {
-        return $this->belongsToMany(User::class, 'favorites')->withTimestamps();
     }
 
     public function getCoverUrlAttribute(): string

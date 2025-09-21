@@ -55,6 +55,23 @@ class User extends Authenticatable
         ];
     }
 
+    // Relations
+
+    public function commentLikes(): HasMany
+    {
+        return $this->hasMany(CommentLike::class);
+    }
+
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class);
+    }
+    
+    public function watcheds(): HasMany
+    {
+        return $this->hasMany(Watched::class);
+    }
+
     public function movieLikes(): HasMany
     {
         return $this->hasMany(MovieLike::class);
@@ -65,17 +82,9 @@ class User extends Authenticatable
         return $this->hasMany(MovieList::class);
     }
 
-    public function commentLikes(): HasMany
-    {
-        return $this->hasMany(CommentLike::class);
-    }
+    // Querys 
 
-    public function watcheds(): HasMany
-    {
-        return $this->hasMany(Watched::class);
-    }
-
-    public function favoriteMovies()
+    public function favoriteMovies(): BelongsToMany
     {
         return $this->belongsToMany(Movie::class, 'favorites')->withTimestamps();
     }
@@ -89,8 +98,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'followed_id');
     }
-
-    // Querys 
 
     public function watchedMovies(): BelongsToMany
     {

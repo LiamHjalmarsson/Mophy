@@ -67,7 +67,7 @@ class User extends Authenticatable
         return $this->hasMany(Favorite::class);
     }
     
-    public function watcheds(): HasMany
+    public function watched(): HasMany
     {
         return $this->hasMany(Watched::class);
     }
@@ -99,7 +99,7 @@ class User extends Authenticatable
 
     public function watchedMovies(): BelongsToMany
     {
-        $query = $this->belongsToMany(Movie::class, 'watcheds');
+        $query = $this->belongsToMany(Movie::class, 'watched');
         
         $query->withPivot('watched_at');
 

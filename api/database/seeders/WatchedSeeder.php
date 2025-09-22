@@ -25,7 +25,7 @@ class WatchedSeeder extends Seeder
             $watchedMovies = $movies->random(rand(1, 5));
            
             foreach ($watchedMovies as $movie) {
-                $user->watcheds()->updateOrCreate(
+                $user->watched()->updateOrCreate(
                     ['movie_id' => $movie->id],
                     ['watched_at' => now()->subDays(rand(0, 365))]
                 );

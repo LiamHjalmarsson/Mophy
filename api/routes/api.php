@@ -56,21 +56,25 @@ Route::prefix('v1')->group(function () {
     Route::prefix('movies')->group(function () {
         Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['index', 'show']);
 
+        Route::prefix('{movie}')->group(function() {
+            Route::apiResource('reviews', ReviewController::class)->only(['index', 'show']);
+        });
+
         Route::middleware('auth:sanctum')->group(function () {
             Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['store','update','destroy']);
             
             Route::prefix('{movie}')->group(function() {
+                Route::apiResource('favorite', FavoriteController::class)->only(['store', 'destroy']);
+
+                Route::apiResource('rating', RatingController::class)->only(['store', 'destroy']);
+
+                Route::apiResource('reviews', ReviewController::class)->only(['store', 'update', 'destroy']);
+
                 Route::apiResource('reaction', MovieLikeController::class)->only(['store', 'destroy']);
     
-                Route::apiResource('reviews', ReviewController::class);
-                
                 Route::apiResource('watched', WatchedController::class)->only(['store', 'destroy']);
 
                 Route::apiResource('watch-later', WatchLaterController::class)->only(['store', 'destroy']);
-                
-                Route::apiResource('rating', RatingController::class)->only(['store', 'destroy']);
-
-                Route::apiResource('favorite', FavoriteController::class)->only(['store', 'destroy']);
             });
         });
     });

@@ -2,11 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\Movie;
+use App\Models\Rating;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
-class MoviePolicy
+class RatingPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +18,7 @@ class MoviePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Movie $movie): bool
+    public function view(User $user, Rating $rating): bool
     {
         return true;
     }
@@ -29,29 +28,29 @@ class MoviePolicy
      */
     public function create(User $user): bool
     {
-        return $user->is_admin;
+        return $user !== null;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Movie $movie): bool
+    public function update(User $user, Rating $rating): bool
     {
-        return $user->is_admin || $user->id === $movie->created_by;
+        return $user->is_admin || $user->id === $rating->user_id;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Movie $movie): bool
+    public function delete(User $user, Rating $rating): bool
     {
-        return $user->is_admin || $user->id === $movie->created_by;
+        return $user->is_admin || $user->id === $rating->user_id;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Movie $movie): bool
+    public function restore(User $user, Rating $rating): bool
     {
         return false;
     }
@@ -59,7 +58,7 @@ class MoviePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Movie $movie): bool
+    public function forceDelete(User $user, Rating $rating): bool
     {
         return false;
     }

@@ -10,6 +10,7 @@ use App\Http\Requests\Comment\UpdateRequest;
 use App\Http\Resources\Comment\IndexResource;
 use App\Http\Resources\Comment\ShowResource;
 use App\Models\Comment;
+use App\Models\User;
 
 class CommentController extends Controller
 {

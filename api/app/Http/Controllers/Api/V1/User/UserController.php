@@ -10,7 +10,6 @@ use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\IndexResource;
 use App\Http\Resources\User\ShowResource;
 use App\Models\User;
-use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -29,8 +28,6 @@ class UserController extends Controller
      */
     public function store(StoreRequest $request, StoreAction $action)
     {
-        Gate::authorize('create', User::class);
-
         $movie = $action($request);
 
         return new ShowResource($movie);
@@ -49,8 +46,6 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, User $user, UpdateAction $action)
     {
-        Gate::authorize('update', $user);
-
         $updatedUser = $action($request, $user);
 
         return new ShowResource($updatedUser);
@@ -61,8 +56,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        Gate::authorize('delete', $user);
-
         $user->delete();
 
         return response()->noContent();

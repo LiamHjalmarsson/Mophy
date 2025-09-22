@@ -10,8 +10,6 @@ use App\Http\Requests\Genre\UpdateRequest;
 use App\Http\Resources\Genre\IndexResource;
 use App\Http\Resources\Genre\ShowResource;
 use App\Models\Genre;
-use App\Models\User;
-use Illuminate\Support\Facades\Gate;
 
 class GenreController extends Controller
 {
@@ -30,8 +28,6 @@ class GenreController extends Controller
      */
     public function store(StoreRequest $request, StoreAction $action)
     {
-        Gate::authorize('create', Genre::class);
-
         $genre = $action($request);
 
         return new ShowResource($genre);
@@ -52,8 +48,6 @@ class GenreController extends Controller
      */
     public function update(UpdateRequest $request, Genre $genre, UpdateAction $action)
     {
-        Gate::authorize('update',  $genre);
-
         $updatedGenre = $action($request, $genre);
 
         return new ShowResource($updatedGenre); 
@@ -64,8 +58,6 @@ class GenreController extends Controller
      */
     public function destroy(Genre $genre)
     {
-        Gate::authorize('delete', $genre);
-
         $genre->delete();
 
         return response()->noContent();

@@ -40,10 +40,10 @@ Route::prefix('auth')->group(function () {
 
 Route::prefix('v1')->group(function () {
     Route::prefix('comments')->group(function () {
-        Route::apiResource('/', CommentController::class)->parameters(['' => 'comment'])->only(['index', 'show']);
+        Route::apiResource('', CommentController::class)->parameters(['' => 'comment'])->only(['index', 'show']);
         
         Route::middleware('auth:sanctum')->group(function () { 
-            Route::apiResource('/', CommentController::class)->parameters(['' => 'comment'])->only(['store', 'update', 'destroy']);
+            Route::apiResource('', CommentController::class)->parameters(['' => 'comment'])->only(['store', 'update', 'destroy']);
             
             Route::apiResource('{comment}/reaction', CommentLikeController::class)->only(['store', 'destroy']);
         });
@@ -54,14 +54,14 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:sanctum')->apiResource('genres', GenreController::class)->only(['store', 'update', 'destroy']);
 
     Route::prefix('movies')->group(function () {
-        Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['index', 'show']);
+        Route::apiResource('', MovieController::class)->parameters(['' => 'movie'])->only(['index', 'show']);
 
         Route::prefix('{movie}')->group(function() {
             Route::apiResource('reviews', ReviewController::class)->only(['index', 'show']);
         });
 
         Route::middleware('auth:sanctum')->group(function () {
-            Route::apiResource('/', MovieController::class)->parameters(['' => 'movie'])->only(['store','update','destroy']);
+            Route::apiResource('', MovieController::class)->parameters(['' => 'movie'])->only(['store','update','destroy']);
             
             Route::prefix('{movie}')->group(function() {
                 Route::apiResource('favorite', FavoriteController::class)->only(['store', 'destroy']);
@@ -80,21 +80,19 @@ Route::prefix('v1')->group(function () {
     });
     
     Route::prefix('users')->group(function () {
-        Route::apiResource('/', UserController::class)->parameters(['' => 'user'])->only('index', 'show');
+        Route::apiResource('', UserController::class)->parameters(['' => 'user'])->only('index', 'show');
 
         Route::middleware('auth:sanctum')->apiResource('/', UserController::class)->parameters(['' => 'user'])->only(['store', 'update', 'destroy']);
 
         Route::prefix('{user}')->group(function () {                
             Route::apiResource('movie-lists', MovieListController::class)->only(['index', 'show']);
 
-            Route::get('favorite', [FavoriteController::class, 'index', 'destroy']);
+            Route::apiResource('favorite', [FavoriteController::class, 'index', 'destroy']);
 
             Route::get('followers', [FollowController::class, 'followers']);
 
             Route::get('following', [FollowController::class, 'following']);
 
-            Route::apiResource('movie-lists', MovieListController::class)->only(['index', 'show']);
-            
             Route::get('watched', [WatchedController::class, 'index']);
             
             Route::get('watch-later', [WatchLaterController::class, 'index']);

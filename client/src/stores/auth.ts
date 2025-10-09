@@ -3,8 +3,9 @@ import { ref } from "vue";
 import api from "../plugins/api";
 import type { AxiosError } from "axios";
 import type { ApiError } from "../types/api";
+import { handleApiError } from "../utils/handleApiError";
 
-interface RegisterPayload {
+export interface RegisterPayload {
 	name: string;
 	email: string;
 	username: string;
@@ -12,19 +13,21 @@ interface RegisterPayload {
 	password_confirmation: string;
 }
 
+export interface AuthUser {
+	id: number;
+	name: string;
+	username: string;
+	email: string;
+	avatar?: string | null;
+}
+
 export interface AuthResponse {
-	user: {
-		id: number;
-		name: string;
-		username: string;
-		email: string;
-		avatar?: string | null;
-	};
+	user: AuthUser;
 	token: string;
 }
 
 export const useAuthStore = defineStore("auth", () => {
-	const user = ref<AuthResponse["user"] | null>(null);
+	const user = ref<AuthUser | null>(null);
 
 	const loading = ref(false);
 
@@ -52,15 +55,7 @@ export const useAuthStore = defineStore("auth", () => {
 
 			return data;
 		} catch (err) {
-			const axiosError = err as AxiosError<ApiError>;
-
-			error.value = {
-				message: axiosError.response?.data?.message || axiosError.message || "Registration failed.",
-				errors: axiosError.response?.data?.errors,
-				status: axiosError.response?.status,
-			};
-
-			console.log(error.value);
+			error.value = handleApiError(err as Error);
 		} finally {
 			loading.value = false;
 		}

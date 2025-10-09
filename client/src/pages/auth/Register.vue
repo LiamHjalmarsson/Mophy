@@ -3,6 +3,34 @@ import { PhUser, PhLock, PhEnvelope, PhUserCirclePlus } from "@phosphor-icons/vu
 import SocialAuth from "../../components/auth/SocialAuth.vue";
 import BaseInput from "../../components/ui/BaseInput.vue";
 import BaseButton from "../../components/ui/BaseButton.vue";
+import { useAuthStore } from "../../stores/auth";
+import { reactive } from "vue";
+
+const authStore = useAuthStore();
+
+const user = reactive({
+	name: "",
+	email: "",
+	username: "",
+	password: "",
+	password_confirmation: "",
+});
+
+async function handleRegister() {
+	try {
+		await authStore.register({
+			name: user.name,
+			email: user.email,
+			username: user.username,
+			password: user.password,
+			password_confirmation: user.password_confirmation,
+		});
+
+		console.log("Registered successfully", authStore.user);
+	} catch (e) {
+		console.error("Registration failed:", authStore.error);
+	}
+}
 </script>
 
 <template>
@@ -13,20 +41,28 @@ import BaseButton from "../../components/ui/BaseButton.vue";
 				<p class="text-gray-300 text-sm mt-2">Join our community and get started today</p>
 			</div>
 
-			<form class="space-y-10">
-				<BaseInput label="Full Name" placeholder="John Doe">
+			<form @submit.prevent="handleRegister" class="space-y-6">
+				<BaseInput v-model="user.name" label="Full Name" placeholder="John Doe">
 					<PhUser class="absolute right-3 top-3.5 text-gray-400" size="20" />
 				</BaseInput>
 
-				<BaseInput label="Email" placeholder="you@example.com" type="email">
+				<BaseInput v-model="user.username" label="Username" placeholder="John Doe">
+					<PhUser class="absolute right-3 top-3.5 text-gray-400" size="20" />
+				</BaseInput>
+
+				<BaseInput v-model="user.email" label="Email" placeholder="you@example.com" type="email">
 					<PhEnvelope class="absolute right-3 top-3.5 text-gray-400" size="20" />
 				</BaseInput>
 
-				<BaseInput label="Password" placeholder="••••••••" type="password">
+				<BaseInput v-model="user.password" label="Password" placeholder="••••••••" type="password">
 					<PhLock class="absolute right-3 top-3.5 text-gray-400" size="20" />
 				</BaseInput>
 
-				<BaseInput label="Confirm Password" placeholder="••••••••" type="password">
+				<BaseInput
+					v-model="user.password_confirmation"
+					label="Confirm Password"
+					placeholder="••••••••"
+					type="password">
 					<PhLock class="absolute right-3 top-3.5 text-gray-400" size="20" />
 				</BaseInput>
 

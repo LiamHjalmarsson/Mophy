@@ -1,32 +1,28 @@
 <script setup lang="ts">
-type Input = {
-	label: string;
-	modelValue?: string;
-	placeholder?: string;
+const modelValue = defineModel<string>();
+
+const { label } = defineProps<{
+	label?: string;
 	type?: string;
-};
+	placeholder?: string;
+}>();
 
-const { label } = defineProps<Input>();
-
-const emit = defineEmits(["update:modelValue"]);
-
-const id = label.toLocaleLowerCase().replace(" ", "-");
+const id = label ? label.toLowerCase().replace(" ", "-") : "input";
 </script>
 
 <template>
 	<div>
-		<label :for="id" class="block text-sm font-medium mb-2">
+		<label v-if="label" :for="id" class="block text-sm font-medium mb-2">
 			{{ label }}
 		</label>
 
 		<div class="relative">
 			<input
-				:id
+				v-model="modelValue"
+				:id="id"
 				:type="type || 'text'"
 				:placeholder="placeholder || ''"
-				:value="modelValue"
 				class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none placeholder-gray-300 text-white" />
-
 			<slot />
 		</div>
 	</div>

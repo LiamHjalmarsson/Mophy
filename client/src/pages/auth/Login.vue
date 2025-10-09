@@ -4,8 +4,12 @@ import { PhEnvelope, PhLock, PhSignIn } from "@phosphor-icons/vue";
 import { useAuthStore } from "../../stores/auth";
 import BaseInput from "../../components/ui/BaseInput.vue";
 import BaseButton from "../../components/ui/BaseButton.vue";
+import SocialAuth from "../../components/auth/SocialAuth.vue";
+import { useRouter } from "vue-router";
 
 const authStore = useAuthStore();
+
+const router = useRouter();
 
 const credentials = reactive({
 	email: "",
@@ -18,6 +22,8 @@ async function handleLogin(): Promise<void> {
 			email: credentials.email,
 			password: credentials.password,
 		});
+
+		await router.push({ name: "dashboard" });
 
 		console.log("✅ Logged in:", authStore.user);
 	} catch (err) {

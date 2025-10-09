@@ -5,8 +5,11 @@ import BaseInput from "../../components/ui/BaseInput.vue";
 import BaseButton from "../../components/ui/BaseButton.vue";
 import { useAuthStore } from "../../stores/auth";
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
 
 const authStore = useAuthStore();
+
+const router = useRouter();
 
 const user = reactive({
 	name: "",
@@ -25,6 +28,8 @@ async function handleRegister() {
 			password: user.password,
 			password_confirmation: user.password_confirmation,
 		});
+
+		await router.push({ name: "dashboard" });
 
 		console.log("Registered successfully", authStore.user);
 	} catch (e) {

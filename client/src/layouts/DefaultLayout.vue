@@ -24,6 +24,18 @@ function handleLogout() {
 	<div class="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-800">
 		<MainNavigation />
 
+		<aside>
+			<nav>
+				<div>Menu</div>
+				<ul>
+					<li class="flex">
+						<PhUserCircle size="32" />
+						Trends
+					</li>
+				</ul>
+			</nav>
+		</aside>
+
 		<main class="">
 			<RouterView />
 		</main>

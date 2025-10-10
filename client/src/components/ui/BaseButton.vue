@@ -9,7 +9,7 @@ defineProps<{
 	<button
 		:type="type || 'button'"
 		:class="[
-			'w-full py-3 rounded-lg font-semibold shadow-lg transition-all flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer',
+			'w-full py-3 rounded-lg font-semibold shadow-lg transition-all flex items-center justify-center gap-2 bg-fuchsia-600 hover:bg-fuchsia-700 text-white cursor-pointer',
 		]">
 		{{ label }}
 		<slot />

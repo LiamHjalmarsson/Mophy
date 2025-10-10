@@ -11,7 +11,7 @@ import SocialAuthButton from "./SocialAuthButton.vue";
 			<span class="w-1/5 border-t border-gray-300" />
 		</div>
 
-		<div class="flex justify-center mt-4 space-x-3">
+		<div class="flex justify-center mt-4 space-x-4">
 			<SocialAuthButton>
 				<PhGoogleLogo size="20" weight="fill" />
 			</SocialAuthButton>

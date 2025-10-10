@@ -48,19 +48,19 @@ async function handleRegister() {
 
 			<form @submit.prevent="handleRegister" class="space-y-6">
 				<BaseInput v-model="user.name" label="Full Name" placeholder="John Doe">
-					<PhUser class="absolute right-3 top-3.5 text-gray-400" size="20" />
+					<PhUser class="absolute right-3 top-3.5" size="20" />
 				</BaseInput>
 
 				<BaseInput v-model="user.username" label="Username" placeholder="John Doe">
-					<PhUser class="absolute right-3 top-3.5 text-gray-400" size="20" />
+					<PhUser class="absolute right-3 top-3.5" size="20" />
 				</BaseInput>
 
 				<BaseInput v-model="user.email" label="Email" placeholder="you@example.com" type="email">
-					<PhEnvelope class="absolute right-3 top-3.5 text-gray-400" size="20" />
+					<PhEnvelope class="absolute right-3 top-3.5" size="20" />
 				</BaseInput>
 
 				<BaseInput v-model="user.password" label="Password" placeholder="••••••••" type="password">
-					<PhLock class="absolute right-3 top-3.5 text-gray-400" size="20" />
+					<PhLock class="absolute right-3 top-3.5" size="20" />
 				</BaseInput>
 
 				<BaseInput
@@ -68,7 +68,7 @@ async function handleRegister() {
 					label="Confirm Password"
 					placeholder="••••••••"
 					type="password">
-					<PhLock class="absolute right-3 top-3.5 text-gray-400" size="20" />
+					<PhLock class="absolute right-3 top-3.5" size="20" />
 				</BaseInput>
 
 				<BaseButton type="submit" label="Register">
@@ -78,7 +78,9 @@ async function handleRegister() {
 
 			<p class="text-center text-sm text-gray-300 mt-6">
 				Already have an account?
-				<RouterLink to="/login" class="block text-blue-400 hover:text-blue-300 font-bold">Login</RouterLink>
+				<RouterLink to="/login" class="block text-fuchsia-400 hover:text-fuchsia-300 font-bold"
+					>Login</RouterLink
+				>
 			</p>
 
 			<SocialAuth />

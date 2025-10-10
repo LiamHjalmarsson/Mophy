@@ -2,7 +2,7 @@
 
 <template>
 	<div
-		class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-blue-900 to-indigo-800">
+		class="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-fuchsia-900 to-indigo-800">
 		<RouterView />
 	</div>
 </template>

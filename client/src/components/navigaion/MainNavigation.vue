@@ -2,7 +2,7 @@
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "../../stores/auth";
-import { PhUser, PhMagnifyingGlass } from "@phosphor-icons/vue";
+import { PhUser, PhMagnifyingGlass, PhHouse, PhSignOut, PhGear } from "@phosphor-icons/vue";
 
 const router = useRouter();
 
@@ -10,7 +10,7 @@ const authStore = useAuthStore();
 
 const showMenu = ref(false);
 
-const isAuthenticated = computed(() => !!authStore.user);
+const isAuthenticated = computed(() => authStore.user !== null);
 
 function toggleMenu() {
 	showMenu.value = !showMenu.value;
@@ -26,7 +26,7 @@ async function handleLogout(): Promise<void> {
 </script>
 
 <template>
-	<nav class="sticky top-0 z-50 w-full">
+	<nav class="fixed top-0 z-50 w-full bg-slate-900 text-slate-100">
 		<div class="max-w-7xl mx-auto flex items-center justify-between px-10 text-gray-900">
 			<div class="flex items-center">
 				<div v-if="isAuthenticated">
@@ -56,21 +56,21 @@ async function handleLogout(): Promise<void> {
 								<div class="py-2 text-sm">
 									<RouterLink
 										to="/dashboard"
-										class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
+										class="flex items-center gap-2 px-4 py-2 text-gray-500 hover:bg-gray-50 transition-colors"
 										@click="showMenu = false">
 										<PhHouse size="18" /> Dashboard
 									</RouterLink>
 
 									<RouterLink
 										to="/profile"
-										class="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-50 transition-colors"
+										class="flex items-center gap-2 px-4 py-2 text-gray-500 hover:bg-gray-50 transition-colors"
 										@click="showMenu = false">
 										<PhGear size="18" /> Profile
 									</RouterLink>
 
 									<button
 										@click="handleLogout"
-										class="flex items-center w-full gap-2 px-4 py-2 text-gray-700 hover:bg-red-50 hover:text-red-500 transition-colors">
+										class="flex items-center w-full gap-2 px-4 py-2 text-gray-500 hover:bg-red-50 hover:text-red-500 transition-colors">
 										<PhSignOut size="18" /> Logout
 									</button>
 								</div>
@@ -82,7 +82,7 @@ async function handleLogout(): Promise<void> {
 				<RouterLink
 					v-else
 					to="/login"
-					class="p-2 rounded-xl bg-gray-100 hover:bg-gray-50 border border-gray-200 transition-all text-gray-800">
+					class="p-2 rounded-xl bg-gray-700 hover:bg-gray-600 border border-gray-600 transition-all text-gray-300">
 					<PhUser size="24" weight="bold" />
 				</RouterLink>
 			</div>
@@ -90,14 +90,15 @@ async function handleLogout(): Promise<void> {
 			<div class="flex items-stretch h-full">
 				<RouterLink
 					to="/"
-					class="flex justify-center items-center text-gray-800 font-semibold hover:bg-indigo-50 transition-colors px-8"
-					active-class="bg-indigo-50 text-indigo-600"
-					>Start</RouterLink
+					class="flex justify-center items-center text-gray-500 font-semibold hover:bg-rose-500 transition-colors px-8"
+					active-class="bg-rose-500 text-slate-100"
+					>Popular</RouterLink
 				>
 				<RouterLink
 					to="/discover"
-					class="flex justify-center items-center text-gray-800 font-semibold hover:bg-indigo-50 transition-colors px-8"
-					>Discover</RouterLink
+					class="flex justify-center items-center text-gray-500 font-semibold hover:bg-fuchsia-50 transition-colors px-8"
+					active-class="bg-rose-500 text-slate-100"
+					>Upcoming</RouterLink
 				>
 
 				<RouterLink to="/" class="">
@@ -106,18 +107,21 @@ async function handleLogout(): Promise<void> {
 
 				<RouterLink
 					to="/trending"
-					class="flex justify-center items-center text-gray-800 font-semibold hover:bg-indigo-50 transition-colors px-8"
-					>Trending</RouterLink
+					class="flex justify-center items-center text-gray-500 font-semibold hover:bg-fuchsia-50 transition-colors px-8"
+					active-class="bg-rose-500 text-slate-100"
+					>Top</RouterLink
 				>
 				<RouterLink
 					to="/genres"
-					class="flex justify-center items-center text-gray-800 font-semibold hover:bg-indigo-50 transition-colors px-8"
+					class="flex justify-center items-center text-gray-500 font-semibold hover:bg-fuchsia-50 transition-colors px-8"
+					active-class="bg-rose-500 text-slate-100"
 					>Genres</RouterLink
 				>
 			</div>
+
 			<div class="flex items-center">
 				<button
-					class="p-2 rounded-xl bg-gray-100 hover:bg-gray-50 border border-gray-200 transition-all text-gray-800"
+					class="p-2 rounded-xl bg-gray-700 hover:bg-gray-600 border border-gray-600 transition-all text-gray-300"
 					@click="router.push('/search')">
 					<PhMagnifyingGlass size="24" weight="bold" />
 				</button>

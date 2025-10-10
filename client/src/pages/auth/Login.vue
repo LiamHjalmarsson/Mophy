@@ -25,9 +25,9 @@ async function handleLogin(): Promise<void> {
 
 		await router.push({ name: "dashboard" });
 
-		console.log("✅ Logged in:", authStore.user);
+		console.log("Logged in:", authStore.user);
 	} catch (err) {
-		console.error("❌ Login failed:", authStore.error);
+		console.error("Login failed:", authStore.error);
 	}
 }
 </script>
@@ -37,16 +37,16 @@ async function handleLogin(): Promise<void> {
 		<div class="bg-white/10 backdrop-blur-md text-white rounded-xl shadow-2xl p-8 border border-white/20">
 			<div class="flex flex-col items-center mb-8">
 				<h1 class="text-3xl font-bold text-center">Welcome Back</h1>
-				<p class="text-gray-300 text-sm mt-2">Sign in to continue to your dashboard</p>
+				<p class="text-gray-300 text-sm mt-2"></p>
 			</div>
 
 			<form @submit.prevent="handleLogin" class="space-y-6">
 				<BaseInput v-model="credentials.email" label="Email" type="email" placeholder="you@example.com">
-					<PhEnvelope class="absolute right-3 top-3.5 text-gray-400" size="20" />
+					<PhEnvelope class="absolute right-3 top-3.5" size="20" />
 				</BaseInput>
 
 				<BaseInput v-model="credentials.password" label="Password" type="password" placeholder="••••••••">
-					<PhLock class="absolute right-3 top-3.5 text-gray-400" size="20" />
+					<PhLock class="absolute right-3 top-3.5" size="20" />
 				</BaseInput>
 
 				<p v-if="authStore.error" class="text-red-400 text-sm text-center mt-2">
@@ -63,7 +63,7 @@ async function handleLogin(): Promise<void> {
 
 			<p class="text-center text-sm text-gray-300 mt-6">
 				Don’t have an account?
-				<RouterLink to="/register" class="block text-blue-400 hover:text-blue-300 font-bold">
+				<RouterLink to="/register" class="block text-fuchsia-400 hover:text-fuchsia-300 font-bold">
 					Register
 				</RouterLink>
 			</p>

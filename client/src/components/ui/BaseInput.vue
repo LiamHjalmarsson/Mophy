@@ -22,7 +22,7 @@ const id = label ? label.toLowerCase().replace(" ", "-") : "input";
 				:id="id"
 				:type="type || 'text'"
 				:placeholder="placeholder || ''"
-				class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none placeholder-gray-300 text-white" />
+				class="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg focus:ring-2 focus:ring-fuchsia-400 outline-none placeholder-gray-300 text-white" />
 			<slot />
 		</div>
 	</div>

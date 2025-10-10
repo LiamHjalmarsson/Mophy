@@ -79,6 +79,60 @@ async function changeCategory(category: string) {
 			<div class="container mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10 py-10" role="list">
 				<MovieCard v-for="movie in movies.slice(5, 15)" :key="movie.id" :movie="movie" role="listitem" />
 			</div>
+
+			<div>pages</div>
+		</section>
+
+		<section class="py-20 border-t border-slate-800">
+			<div class="container mx-auto">
+				<div class="flex justify-between items-center mb-10">
+					<h3 class="font-semibold text-lg">Popular People</h3>
+					<p class="text-slate-500 text-sm">Actors & creators trending right now</p>
+				</div>
+
+				<div
+					v-if="people.length"
+					class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-10">
+					<PersonCard v-for="person in people.slice(0, 12)" :key="person.id" :person="person" />
+				</div>
+
+				<div v-else class="text-gray-500 text-center">Loading popular people...</div>
+			</div>
+		</section>
+
+		<!-- Extra dont bring wiht -->
+		<div>
+			<!-- <section class="py-24 border-t border-slate-800">
+			<div class="container mx-auto flex flex-col md:flex-row items-center gap-10">
+				<img src="/assets/mophy.png" alt="Director" class="w-full md:w-1/3 rounded-xl object-cover shadow-lg" />
+				<div class="flex-1">
+					<p class="text-emerald-400 text-sm font-medium mb-2">Spotlight Filmmaker</p>
+					<h3 class="text-3xl font-bold mb-4">Denis Villeneuve</h3>
+					<p class="text-slate-400 text-sm mb-6">
+						Known for his visionary storytelling in <em>Dune</em>, <em>Arrival</em> and
+						<em>Blade Runner 2049</em>. Villeneuve has redefined modern science fiction cinema.
+					</p>
+					<button
+						class="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold px-6 py-3 rounded-lg">
+						View Filmography
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="py-20 border-t border-slate-800">
+			<div class="container mx-auto">
+				<h3 class="font-semibold text-lg mb-10">Top Rated by Genre</h3>
+				<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+					<div
+						v-for="genre in ['Action', 'Drama', 'Comedy', 'Horror', 'Sci-Fi']"
+						:key="genre"
+						class="bg-slate-800/60 rounded-xl p-8 text-center hover:bg-slate-700/60 transition-all cursor-pointer">
+						<p class="text-white font-semibold mb-2">{{ genre }}</p>
+						<p class="text-slate-400 text-sm">Explore best-rated {{ genre.toLowerCase() }} films</p>
+					</div>
+				</div>
+			</div>
 		</section>
 
 		<section class="py-20 border-t border-slate-800 text-center">
@@ -121,20 +175,81 @@ async function changeCategory(category: string) {
 			</div>
 		</section>
 
-		<section class="py-20 border-t border-slate-800">
+		<section class="py-20 border-t border-slate-800 text-center">
 			<div class="container mx-auto">
-				<div class="flex justify-between items-center mb-10">
-					<h3 class="font-semibold text-lg">Popular People</h3>
-					<p class="text-slate-500 text-sm">Actors & creators trending right now</p>
+				<h3 class="text-2xl font-bold mb-6">Vote: Best Movie of the Week</h3>
+				<div class="flex flex-wrap justify-center gap-6">
+					<button class="bg-slate-800/70 hover:bg-slate-700 text-white px-6 py-3 rounded-full transition-all">
+						Dune: Part Two
+					</button>
+					<button class="bg-slate-800/70 hover:bg-slate-700 text-white px-6 py-3 rounded-full transition-all">
+						Oppenheimer
+					</button>
+					<button class="bg-slate-800/70 hover:bg-slate-700 text-white px-6 py-3 rounded-full transition-all">
+						John Wick 4
+					</button>
+					<button class="bg-slate-800/70 hover:bg-slate-700 text-white px-6 py-3 rounded-full transition-all">
+						Barbie
+					</button>
 				</div>
+			</div>
+		</section>
 
-				<div
-					v-if="people.length"
-					class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-10">
-					<PersonCard v-for="person in people.slice(0, 12)" :key="person.id" :person="person" />
+		<section class="py-20 border-t border-slate-800 text-center">
+			<div class="container mx-auto">
+				<h3 class="text-2xl font-bold mb-6">Community Highlights</h3>
+				<p class="text-slate-400 mb-10 max-w-xl mx-auto">
+					See what other film fans are watching, discussing, and recommending this week.
+				</p>
+				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left">
+					<div
+						v-for="post in [
+							{ user: 'LiamH', text: 'Loved the cinematography in Dune 2 — pure visual poetry.' },
+							{
+								user: 'MiaFilms',
+								text: 'The Batman’s noir atmosphere makes it one of the best reboots ever.',
+							},
+							{ user: 'FilmGeek', text: 'Oppenheimer’s pacing and dialogue deserve another Oscar run.' },
+						]"
+						:key="post.user"
+						class="bg-slate-800/60 rounded-xl p-6">
+						<p class="text-slate-300 text-sm italic mb-3">“{{ post.text }}”</p>
+						<p class="text-slate-500 text-xs font-medium">— {{ post.user }}</p>
+					</div>
 				</div>
+			</div>
+		</section>
 
-				<div v-else class="text-gray-500 text-center">Loading popular people...</div>
+		<section class="py-20 border-t border-slate-800 text-center">
+			<div class="container mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+				<div>
+					<h4 class="text-3xl font-bold text-white">50K+</h4>
+					<p class="text-slate-400 text-sm">Movies Indexed</p>
+				</div>
+				<div>
+					<h4 class="text-3xl font-bold text-white">15K+</h4>
+					<p class="text-slate-400 text-sm">Actors Listed</p>
+				</div>
+				<div>
+					<h4 class="text-3xl font-bold text-white">1200+</h4>
+					<p class="text-slate-400 text-sm">Collections Curated</p>
+				</div>
+				<div>
+					<h4 class="text-3xl font-bold text-white">10+</h4>
+					<p class="text-slate-400 text-sm">Years of Data</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="relative h-[400px] border-t border-slate-800 overflow-hidden">
+			<img src="/assets/mophy.png" class="absolute inset-0 w-full h-full object-cover opacity-70" />
+			<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent"></div>
+			<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+				<h3 class="text-3xl font-bold mb-4 text-white">Watch the Latest Trailers</h3>
+				<button
+					class="bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold px-8 py-3 rounded-full">
+					Play Now
+				</button>
 			</div>
 		</section>
 
@@ -154,6 +269,7 @@ async function changeCategory(category: string) {
 					</button>
 				</form>
 			</div>
-		</section>
+		</section> -->
+		</div>
 	</div>
 </template>

@@ -7,7 +7,7 @@ defineProps<{ movie: TMDBMovie }>();
 
 <template>
 	<article
-		class="relative rounded-2xl overflow-hidden shadow-md bg-slate-800/60 cursor-pointer ease-in-out flex flex-col justify-end"
+		class="relative rounded-2xl overflow-hidden shadow-md bg-slate-800/60 cursor-pointer ease-in-out flex flex-col justify-end min-h-96"
 		tabindex="0"
 		aria-labelledby="movie-title"
 		:aria-label="movie.title">

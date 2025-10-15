@@ -5,7 +5,7 @@ import { useRouter } from "vue-router";
 import { useAuthStore } from "../stores/auth";
 import BaseInput from "@/shared/components/ui/BaseInput.vue";
 import BaseButton from "@/shared/components/ui/BaseButton.vue";
-import SocialAuth from "../components/SocialAuth.vue";
+import AuthCard from "../components/AuthCard.vue";
 
 const { login, user, error, loading } = useAuthStore();
 
@@ -33,39 +33,30 @@ async function handleLogin(): Promise<void> {
 </script>
 
 <template>
-	<div class="w-full max-w-lg p-2 border border-white/20 rounded-2xl">
-		<div class="bg-white/10 backdrop-blur-md text-white rounded-xl shadow-2xl p-8 border border-white/20">
-			<div class="flex flex-col items-center mb-8">
-				<h1 class="text-3xl font-bold text-center">Welcome Back</h1>
-				<p class="text-gray-300 text-sm mt-2"></p>
-			</div>
+	<AuthCard title="Welcome Back" subtitle="Login to access your account" @submit="handleLogin">
+		<BaseInput v-model="credentials.email" label="Email" type="email" placeholder="you@example.com">
+			<PhEnvelope class="absolute right-3 top-3.5" size="20" />
+		</BaseInput>
 
-			<form @submit.prevent="handleLogin" class="space-y-6">
-				<BaseInput v-model="credentials.email" label="Email" type="email" placeholder="you@example.com">
-					<PhEnvelope class="absolute right-3 top-3.5" size="20" />
-				</BaseInput>
+		<BaseInput v-model="credentials.password" label="Password" type="password" placeholder="••••••••">
+			<PhLock class="absolute right-3 top-3.5" size="20" />
+		</BaseInput>
 
-				<BaseInput v-model="credentials.password" label="Password" type="password" placeholder="••••••••">
-					<PhLock class="absolute right-3 top-3.5" size="20" />
-				</BaseInput>
+		<p v-if="error" class="text-red-400 text-sm text-center mt-5">
+			{{ error.message }}
+		</p>
 
-				<p v-if="error" class="text-red-400 text-sm text-center mt-2">
-					{{ error.message }}
-				</p>
+		<BaseButton type="submit" :disabled="loading" :label="loading ? 'Logging in...' : 'Login'">
+			<PhSignIn size="20" weight="bold" />
+		</BaseButton>
 
-				<BaseButton type="submit" :disabled="loading" :label="loading ? 'Logging in...' : 'Login'">
-					<PhSignIn size="20" weight="bold" />
-				</BaseButton>
-			</form>
-
-			<p class="text-center text-sm text-gray-300 mt-6">
+		<template #footer>
+			<p class="text-center text-sm text-gray-300 mt-10">
 				Don’t have an account?
-				<RouterLink to="/register" class="block text-fuchsia-400 hover:text-fuchsia-300 font-bold">
+				<RouterLink to="/register" class="text-fuchsia-400 hover:text-fuchsia-300 font-bold">
 					Register
 				</RouterLink>
 			</p>
-
-			<SocialAuth />
-		</div>
-	</div>
+		</template>
+	</AuthCard>
 </template>

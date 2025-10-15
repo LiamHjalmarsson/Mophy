@@ -4,14 +4,14 @@ import SocialAuthButton from "./SocialAuthButton.vue";
 </script>
 
 <template>
-	<div class="mt-8">
-		<div class="flex items-center justify-center space-x-4 text-sm">
+	<div class="mt-10">
+		<div class="flex items-center justify-center space-x-5 text-sm">
 			<span class="w-1/5 border-t border-gray-300" />
 			<span>or sign up with</span>
 			<span class="w-1/5 border-t border-gray-300" />
 		</div>
 
-		<div class="flex justify-center mt-4 space-x-4">
+		<div class="flex justify-center mt-10 space-x-4">
 			<SocialAuthButton>
 				<PhGoogleLogo size="20" weight="fill" />
 			</SocialAuthButton>

@@ -1,5 +1,4 @@
 export interface RegisterPayload {
-	name: string;
 	email: string;
 	username: string;
 	password: string;
@@ -13,7 +12,7 @@ export interface LoginPayload {
 
 export interface AuthUser {
 	id: number;
-	name: string;
+	name?: string;
 	username: string;
 	email: string;
 	avatar?: string | null;

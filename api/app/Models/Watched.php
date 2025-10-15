@@ -16,6 +16,8 @@ class Watched extends Model
         'watched_at'
     ];
 
+    protected $table = 'watched';
+
     protected $casts = [
         'watched_at' => 'datetime',
     ];

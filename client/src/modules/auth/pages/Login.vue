@@ -53,7 +53,7 @@ async function handleLogin(): Promise<void> {
 		<template #footer>
 			<p class="text-center text-sm text-gray-300 mt-10">
 				Don’t have an account?
-				<RouterLink to="/register" class="text-fuchsia-400 hover:text-fuchsia-300 font-bold">
+				<RouterLink to="/register" class="text-fuchsia-400 hover:text-fuchsia-300 font-bold block">
 					Register
 				</RouterLink>
 			</p>

@@ -12,7 +12,6 @@ const { register, error } = useAuthStore();
 const router = useRouter();
 
 const user = reactive({
-	name: "",
 	email: "",
 	username: "",
 	password: "",
@@ -22,7 +21,6 @@ const user = reactive({
 async function handleRegister() {
 	try {
 		await register({
-			name: user.name,
 			email: user.email,
 			username: user.username,
 			password: user.password,
@@ -61,7 +59,7 @@ async function handleRegister() {
 		<template #footer>
 			<p class="text-center text-sm text-gray-300 mt-10">
 				Already have an account?
-				<RouterLink to="/login" class="block text-fuchsia-400 hover:text-fuchsia-300 font-bold"
+				<RouterLink to="/login" class="text-fuchsia-400 hover:text-fuchsia-300 font-bold block"
 					>Login</RouterLink
 				>
 			</p>
